@@ -3,24 +3,23 @@
 *@
 @{
 }
+
+@model Award;
+
 <div class="craeteawards container">
     <h2>Create Award</h2>
-    <form>
+    <form method="post" asp-controller="Home" asp-action="CreateAwards">
         <label for="awardName">Award Name</label>
-        <input type="text" id="awardName" placeholder="Enter award name" required>
-
-        <label for="description">Award Description</label>
-        <textarea id="description" rows="4" placeholder="Enter description" required></textarea>
+        <input type="text" id="awardName" asp-for="AwardTitle" placeholder="Enter award name" required>
+        <span asp-validation-for="AwardTitle" style="color: red;"></span>
 
         <label for="dateGiven">Date Given</label>
-        <input type="date" id="dateGiven" required>
+        <input type="date" asp-for="AwardedDate" id="dateGiven">
+        <span asp-validation-for="AwardedDate" style="color: red;"></span>
 
-        <label for="role">Recipient Role</label>
-        <select id="role" required>
+        <label for="role">Select Winner:</label>
+        <select id="role" asp-for="StudentId" asp-items="@(new SelectList(ViewBag.students, "Id", "UserName"))">
             <option value="">Select Role</option>
-            <option>Student</option>
-            <option>Staff</option>
-            <option>Manager</option>
         </select>
 
         <button type="submit">Submit</button>

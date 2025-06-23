@@ -1,4 +1,5 @@
 using Institute_Of_Fine_Arts.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -10,11 +11,13 @@ namespace Institute_Of_Fine_Arts.Controllers
     {
         private readonly ApplicationDbContext _Context;
         private readonly IWebHostEnvironment _root;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ApplicationDbContext context, IWebHostEnvironment root)
+        public HomeController(ApplicationDbContext context, IWebHostEnvironment root, UserManager<IdentityUser> userManager)
         {
             _Context = context;
             _root = root;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -29,6 +32,8 @@ namespace Institute_Of_Fine_Arts.Controllers
 
         public IActionResult CreateCompetitions()
         {
+            TempData["awards"] = _Context.Awards.ToList();
+
             return View();
         }
 
@@ -47,8 +52,11 @@ namespace Institute_Of_Fine_Arts.Controllers
             return View();
         }
 
-        public IActionResult CreateAwards()
+        public async Task<IActionResult> CreateAwards()
         {
+            var students = await _userManager.GetUsersInRoleAsync("student");
+            ViewBag.students = students;
+
             return View();
         }
 

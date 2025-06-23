@@ -3,28 +3,42 @@
 *@
 @{
 }
+
+@model Competition;
+
 <div class="createcompetitions container">
     <h2>Create New Competition</h2>
-    <form action="add_competition.php" method="POST" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="CreateCompetitions">
 
         <label for="title">Competition Title:</label>
-        <input type="text" id="title" name="title" required />
+        <input type="text" id="title" asp-for="Title" required />
+        <span asp-validation-for="Title" style="color:red;"></span>
 
         <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
+        <textarea id="description" asp-for="Conditions" rows="4" required></textarea>
+        <span asp-validation-for="Conditions" style="color:red;"></span>
 
         <label for="start_date">Start Date:</label>
-        <input type="date" id="start_date" name="start_date" required />
+        <input type="date" id="start_date" asp-for="StartDate" required />
+        <span asp-validation-for="StartDate" style="color:red;"></span>
 
         <label for="end_date">End Date:</label>
-        <input type="date" id="end_date" name="end_date" required />
+        <input type="date" id="end_date" asp-for="EndDate" required />
+        <span asp-validation-for="EndDate" style="color:red;"></span>
 
         <label for="award_details">Award Details:</label>
-        <textarea id="award_details" name="award_details" rows="4" placeholder="Enter award info (e.g., Trophy + Certificate)"></textarea>
+        <select class="form-control" asp-for="AwardDetails">
+            @foreach(var award in TempData["awards"] as List<Award>)
+            {
+                <option value="@award.Id">@award.AwardTitle</option>
+            }
+        </select>
 
 
-        <label for="banner">Upload Banner Image (optional):</label>
-        <input type="file" id="banner" name="banner" accept="image/*" />
+        <label>Upload Banner Image (optional):</label>
+        <button for="banner">Upload Banner</button>
+        <input hidden type="file" id="banner" asp-for="Banner" accept="image/*" />
+        <span asp-validation-for="Banner" style="color:red;"></span>
 
         <button type="submit">Create Competition</button>
     </form>

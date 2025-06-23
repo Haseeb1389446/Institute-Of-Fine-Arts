@@ -10,15 +10,17 @@ namespace Institute_Of_Fine_Arts.Models
         public string? Title { get; set; }
 
         [Required]
+        public string? Conditions { get; set; }
+
+        [Required]
         public DateTime StartDate { get; set; }
 
         [Required]
         public DateTime EndDate { get; set; }
 
-        public string? Conditions { get; set; }
-
+        [Required]
         public string? AwardDetails { get; set; }
 
-        public ICollection<Painting> paintings { get; set; }
+        public string? Banner { get; set; }
     }
 }
