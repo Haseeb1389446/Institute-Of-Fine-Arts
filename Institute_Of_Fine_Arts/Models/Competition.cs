@@ -10,7 +10,7 @@ namespace Institute_Of_Fine_Arts.Models
         public string? Title { get; set; }
 
         [Required]
-        public string? Conditions { get; set; }
+        public string? Description { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }
@@ -20,6 +20,9 @@ namespace Institute_Of_Fine_Arts.Models
 
         [Required]
         public string? AwardDetails { get; set; }
+
+        [Required]
+        public string? Status { get; set; }
 
         public string? Banner { get; set; }
     }

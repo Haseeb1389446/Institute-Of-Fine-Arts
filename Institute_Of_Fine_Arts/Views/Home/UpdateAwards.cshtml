@@ -7,8 +7,8 @@
 @model Award;
 
 <div class="craeteawards container">
-    <h2>Create Award</h2>
-    <form method="post" asp-controller="Home" asp-action="CreateAwards">
+    <h2>Update Award</h2>
+    <form method="post" asp-controller="Home" asp-action="UpdateAwards">
         <label for="awardName">Award Name</label>
         <input type="text" id="awardName" asp-for="AwardTitle" placeholder="Enter award name">
         <span asp-validation-for="AwardTitle" style="color: red;"></span>
@@ -22,6 +22,6 @@
             <option value="">Select Role</option>
         </select>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Update</button>
     </form>
 </div>

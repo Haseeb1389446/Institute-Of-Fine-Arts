@@ -3,12 +3,17 @@
 *@
 @{
 }
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
 
 @model Competition;
 
 <div class="createcompetitions container">
-    <h2>Create New Competition</h2>
-    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="CreateCompetitions">
+    <h2>Update This Competition</h2>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="UpdateCompetitions">
 
         <label for="title">Competition Title:</label>
         <input type="text" id="title" asp-for="Title" />
@@ -28,8 +33,8 @@
 
         <label for="award_details">Award Details:</label>
         <select class="form-control" asp-for="AwardDetails">
-                <option value="">---- Select Award ----</option>
-            @foreach(var award in ViewBag.awards)
+            <option value="">---- Select Award ----</option>
+            @foreach (var award in ViewBag.awards)
             {
                 <option value="@award.Id">@award.AwardTitle</option>
             }
@@ -50,6 +55,6 @@
         <input hidden type="file" id="banner" name="competitionimage" />
         <span asp-validation-for="Banner" style="color:red;"></span>
 
-        <button type="submit">Create Competition</button>
+        <button type="submit">Update Competition</button>
     </form>
 </div>

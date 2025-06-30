@@ -262,9 +262,14 @@ header .container {
     margin-right: 5px;
 }
 
-    .btn-small:hover {
-        background-color: #c07b50;
-    }
+.btn-small:hover {
+   background-color : #c07b50;
+}
+
+.btn-small a{
+    text-decoration: none;
+    color: white;
+}
 
 .btn-danger {
     background-color: #dc3545;

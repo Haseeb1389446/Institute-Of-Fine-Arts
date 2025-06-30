@@ -3,6 +3,9 @@
 *@
 @{
 }
+
+@model List<Award>;
+
 <!-- Main Awards Section -->
 <section class="awards-container">
     <h2>Awards</h2>
@@ -11,12 +14,10 @@
     <div class="award-categories">
         <h3>Award Categories</h3>
         <ul>
-            <li>Best Abstract Art</li>
-            <li>Most Creative Painting</li>
-            <li>Best Digital Art</li>
-            <li>People's Choice Award</li>
-            <li>Best Student Artwork</li>
-            <li>Best Professional Artwork</li>
+            @foreach (var award in Model)
+            {
+                <li>@award.AwardTitle</li>
+            }
         </ul>
     </div>
 

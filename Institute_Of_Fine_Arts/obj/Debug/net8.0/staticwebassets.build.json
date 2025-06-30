@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tNMbDuicKmQJ7jaC85useF82rlYPiXvhRyrh5F3JkUQ=",
+  "Hash": "gJStRwSseMjDkPkK7K3CZQwQkJDapSf7mkhtv7i95+g=",
   "Source": "Institute_Of_Fine_Arts",
   "BasePath": "_content/Institute_Of_Fine_Arts",
   "Mode": "Default",
@@ -1364,6 +1364,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "E:\\CODE CRITERIA\\PROJECTS\\Institute_Of_Fine_Arts\\Institute_Of_Fine_Arts\\wwwroot\\Uploads\\images\\springartcontest.png",
+      "SourceId": "Institute_Of_Fine_Arts",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\CODE CRITERIA\\PROJECTS\\Institute_Of_Fine_Arts\\Institute_Of_Fine_Arts\\wwwroot\\",
+      "BasePath": "_content/Institute_Of_Fine_Arts",
+      "RelativePath": "Uploads/images/springartcontest.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\images\\springartcontest.png"
+    },
+    {
+      "Identity": "E:\\CODE CRITERIA\\PROJECTS\\Institute_Of_Fine_Arts\\Institute_Of_Fine_Arts\\wwwroot\\Uploads\\images\\WhatsApp Image 2025-06-26 at 3.36.40 AM (2) (1).png",
+      "SourceId": "Institute_Of_Fine_Arts",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\CODE CRITERIA\\PROJECTS\\Institute_Of_Fine_Arts\\Institute_Of_Fine_Arts\\wwwroot\\",
+      "BasePath": "_content/Institute_Of_Fine_Arts",
+      "RelativePath": "Uploads/images/WhatsApp Image 2025-06-26 at 3.36.40 AM (2) (1).png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\images\\WhatsApp Image 2025-06-26 at 3.36.40 AM (2) (1).png"
     }
   ]
 }

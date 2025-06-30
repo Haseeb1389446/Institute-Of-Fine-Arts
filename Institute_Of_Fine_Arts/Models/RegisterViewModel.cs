@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Institute_Of_Fine_Arts.Models
 {
-    public class RegisterViewModel : IdentityUser
+    public class RegisterViewModel
     {
         [Required]
         public string? FullName { get; set; }

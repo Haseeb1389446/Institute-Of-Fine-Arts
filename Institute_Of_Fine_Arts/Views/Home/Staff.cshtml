@@ -3,6 +3,9 @@
 *@
 @{
 }
+
+@model ModelsCollectionVeiewModel;
+
 <!-- Main Content Start -->
 <main class="main-content">
     <section class="section">
@@ -18,30 +21,30 @@
                     <thead>
                         <tr>
                             <th>Competition Name</th>
-                            <th>Date</th>
+                            <th>StartDate</th>
+                            <th>EndDate</th>
+                            <th>Award</th>
                             <th>Status</th>
+                            <th>Image</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Annual Art Gala 2025</td>
-                            <td>May 25, 2025</td>
-                            <td>Open</td>
-                            <td>
-                                <button class="btn-small">Edit</button>
-                                <button class="btn-small btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Modern Expressionism Contest</td>
-                            <td>June 10, 2025</td>
-                            <td>Upcoming</td>
-                            <td>
-                                <button class="btn-small">Edit</button>
-                                <button class="btn-small btn-danger">Delete</button>
-                            </td>
-                        </tr>
+                        @foreach(var competition in Model.Competitions) {
+                            <tr>
+                                <td>@competition.Title</td>
+                                <td>@competition.StartDate</td>
+                                <td>@competition.EndDate</td>
+                                <td>@competition.AwardDetails</td>
+                                <td>@competition.Status</td>
+                                <td><img src="~/Uploads/images/@competition.Banner" alt="Competition image" height="50px" width="150px" /></td>
+                                <td>
+                                    <button class="btn-small"><a asp-controller="Home" asp-action="UpdateCompetitions" asp-route-id="@competition.Id">Edit</a></button>
+                                    <button class="btn-small btn-danger"><a asp-controller="Home" asp-action="DeleteCompetitions" asp-route-id="@competition.Id">Delete</a></button>
+                                </td>
+                            </tr>     
+                        }
+
                     </tbody>
                 </table>
             </div>
@@ -92,21 +95,23 @@
                     <thead>
                         <tr>
                             <th>Award Title</th>
-                            <th>Competition</th>
+                            <th>Date</th>
                             <th>Winner</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Best Creativity Award</td>
-                            <td>Annual Art Gala</td>
-                            <td>Emma Watson</td>
-                            <td>
-                                <button class="btn-small">Edit</button>
-                                <button class="btn-small btn-danger">Delete</button>
-                            </td>
-                        </tr>
+                        @foreach(var award in Model.Awards) {
+                            <tr>
+                                <td>@award.AwardTitle</td>
+                                <td>@award.AwardedDate</td>
+                                <td>@(!string.IsNullOrEmpty(award.StudentId) ? award.StudentId : "Not Defined")</td>
+                                <td>
+                                    <button class="btn-small"><a asp-controller="Home" asp-action="UpdateAwards" asp-route-id="@award.Id">Edit</a></button>
+                                    <button class="btn-small btn-danger"><a asp-controller="Home" asp-action="DeleteAwards" asp-route-id="@award.Id">Delete</a></button>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>

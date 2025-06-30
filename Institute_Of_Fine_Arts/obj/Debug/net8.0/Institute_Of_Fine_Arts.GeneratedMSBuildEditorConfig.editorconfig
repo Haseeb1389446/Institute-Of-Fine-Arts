@@ -82,6 +82,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTdWJtaXRQYWludGluZ3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/CODE CRITERIA/PROJECTS/Institute_Of_Fine_Arts/Institute_Of_Fine_Arts/Views/Home/UpdateAwards.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVcGRhdGVBd2FyZHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/CODE CRITERIA/PROJECTS/Institute_Of_Fine_Arts/Institute_Of_Fine_Arts/Views/Home/UpdateCompetitions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVcGRhdGVDb21wZXRpdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/CODE CRITERIA/PROJECTS/Institute_Of_Fine_Arts/Institute_Of_Fine_Arts/Views/Home/ViewPaintings.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3UGFpbnRpbmdzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
