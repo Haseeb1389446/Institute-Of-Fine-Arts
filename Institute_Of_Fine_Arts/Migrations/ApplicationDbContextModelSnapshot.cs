@@ -78,7 +78,12 @@ namespace Institute_Of_Fine_Arts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("awardId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("awardId");
 
                     b.ToTable("Competitions");
                 });
@@ -136,6 +141,10 @@ namespace Institute_Of_Fine_Arts.Migrations
 
                     b.Property<DateTime>("ExhibitionDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -383,6 +392,17 @@ namespace Institute_Of_Fine_Arts.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Competition", b =>
+                {
+                    b.HasOne("Institute_Of_Fine_Arts.Models.Award", "award")
+                        .WithMany()
+                        .HasForeignKey("awardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("award");
                 });
 
             modelBuilder.Entity("Institute_Of_Fine_Arts.Models.ExhibitedPainting", b =>

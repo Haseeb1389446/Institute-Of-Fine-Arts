@@ -9,7 +9,11 @@ namespace Institute_Of_Fine_Arts.Models
         [Required]
         public string Title { get; set; }
 
+        [Required]
         public DateTime ExhibitionDate { get; set; }
+
+        [Required]
+        public string Location { get; set; }
 
         public ICollection<ExhibitedPainting> ExhibitedPaintings { get; set; }
     }

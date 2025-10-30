@@ -15,7 +15,6 @@ namespace Institute_Of_Fine_Arts.Models
         [Required]
         public string? Password { get; set; }
 
-        [Required]
         public string? Role { get; set; }
 
         // public DateTime? AdmissionDate { get; set; }

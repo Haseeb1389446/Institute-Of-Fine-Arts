@@ -25,5 +25,7 @@ namespace Institute_Of_Fine_Arts.Models
         public string? Status { get; set; }
 
         public string? Banner { get; set; }
+
+        public Award award { get; set; }
     }
 }

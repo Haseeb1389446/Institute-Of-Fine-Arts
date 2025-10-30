@@ -242,7 +242,7 @@ namespace Institute_Of_Fine_Arts.Controllers
             var model = new ModelsCollectionVeiewModel
             {
                 Awards = await _Context.Awards.ToListAsync(),
-                Competitions = await _Context.Competitions.ToListAsync()
+                Competitions = await _Context.Competitions.Include(res => res.AwardDetails).ToListAsync()
             };
 
             return View(model);
