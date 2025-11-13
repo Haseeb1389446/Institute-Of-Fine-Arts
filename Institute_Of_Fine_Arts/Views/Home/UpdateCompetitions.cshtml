@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Competition;
+
+<div class="createcompetitions container">
+    <h2>Update This Competition</h2>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="UpdateCompetitions">
+
+        <label for="title">Competition Title:</label>
+        <input type="text" id="title" asp-for="Title" />
+        <span asp-validation-for="Title" style="color:red;"></span>
+
+        <label for="description">Description:</label>
+        <textarea id="description" asp-for="Description" rows="4"></textarea>
+        <span asp-validation-for="Description  " style="color:red;"></span>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" asp-for="StartDate" />
+        <span asp-validation-for="StartDate" style="color:red;"></span>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" asp-for="EndDate" />
+        <span asp-validation-for="EndDate" style="color:red;"></span>
+
+        <label for="award_details">Award Details:</label>
+        <select class="form-control" asp-for="AwardId">
+            <option value="">---- Select Award ----</option>
+            @foreach (var award in ViewBag.awards)
+            {
+                <option value="@award.Id">@award.AwardTitle</option>
+            }
+        </select>
+        <span asp-validation-for="AwardId" style="color:red;"></span>
+
+        <label for="award_status">Award Status:</label>
+        <select class="form-control" asp-for="Status">
+            <option value="">---- Select Status ----</option>
+            <option value="OnGoing">OnGoing</option>
+            <option value="UpComming">UpComming</option>
+            <option value="Completed">Completed</option>
+        </select>
+        <span asp-validation-for="Status" style="color:red;"></span>
+
+        <label for="banner">Upload Banner Image (optional):</label>
+        <label for="banner" class="w-100" style="display: inline-block; padding: 6px 12px; background-color: #d1865c; color: white; cursor: pointer; border-radius: 4px; text-align: center;">Upload Banner</label>
+        <input hidden type="file" id="banner" name="competitionimage" />
+        <span asp-validation-for="Banner" style="color:red;"></span>
+
+        <button type="submit">Update Competition</button>
+    </form>
+</div>

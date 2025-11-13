@@ -1,0 +1,214 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model ModelsCollectionVeiewModel;
+
+<!-- Main Content Start -->
+<main class="main-content">
+    <section class="section">
+        <div class="container">
+            <h2>Welcome, Staff Member!</h2>
+
+            <!-- Manage Competitions -->
+            <div class="dashboard-section">
+                <h3>Manage Competitions</h3>
+                <button class="btn-submit"><a asp-controller="Home" asp-action="CreateCompetitions">Create New Competition</a></button>
+
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Competition Name</th>
+                            <th>StartDate</th>
+                            <th>EndDate</th>
+                            <th>Award</th>
+                            <th>Status</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(Model.Competitions.Count == 0) {
+                            <tr>
+                                <td class="text-center" colspan="7">No competitions available.</td>
+                            </tr>
+                        } else
+                        {
+                        @foreach(var competition in Model.Competitions) {
+                            <tr>
+                                <td>@competition.Title</td>
+                                <td>@competition.StartDate</td>
+                                <td>@competition.EndDate</td>
+                                    <td>@competition.award!.AwardTitle</td>
+                                <td>@competition.Status</td>
+                                <td><img src="~/Uploads/images/@competition.Banner" alt="Competition image" height="50px" width="150px" /></td>
+                                <td>
+                                    <button class="btn-small"><a asp-controller="Home" asp-action="UpdateCompetitions" asp-route-id="@competition.Id">Edit</a></button>
+                                    <button class="btn-small btn-danger"><a asp-controller="Home" asp-action="DeleteCompetitions" asp-route-id="@competition.Id">Delete</a></button>
+                                </td>
+                            </tr>     
+                        }   
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- View and Mark Student Submissions -->
+            <div class="dashboard-section">
+                <h3>Student Submissions</h3>
+
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Painting</th>
+                            <th>Creativity Level</th>
+                            <th>Remarks</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Emma Watson</td>
+                            <td>Sunset Dreams</td>
+                            <td>Better</td>
+                            <td>Great use of colors!</td>
+                            <td>
+                                <button class="btn-small">Mark/Remark</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>City Lights</td>
+                            <td>Moderate</td>
+                            <td>Needs sharper contrasts.</td>
+                            <td>
+                                <button class="btn-small">Mark/Remark</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Manage Awards -->
+            <div class="dashboard-section">
+                <h3>Manage Awards</h3>
+                <button class="btn-submit"><a asp-controller="Home" asp-action="CreateAwards">Add New Award</a></button>
+
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Award Title</th>
+                            <th>Date</th>
+                            <th>Winner</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(Model.Awards.Count == 0) {
+                            <tr>
+                                <td class="text-center" colspan="4">No awards available.</td>
+                            </tr>
+                        } else
+                        {
+                        @foreach(var award in Model.Awards) {
+                            <tr>
+                                <td>@award.AwardTitle</td>
+                                <td>@award.AwardedDate</td>
+                                @* <td>@(!string.IsNullOrEmpty(award.Student!.UserName) ? award.StudentId : "Not Defined")</td> *@
+                                <td>@(award.Student != null ? award.Student.UserName : "Not Defined")</td>
+                                <td>
+                                        <button class="btn-small"><a asp-controller="Home" asp-action="UpdateAwards" asp-route-id="@award.Id">Edit</a></button>
+                                    <button class="btn-small btn-danger"><a asp-controller="Home" asp-action="DeleteAwards" asp-route-id="@award.Id">Delete</a></button>
+                                </td>
+                            </tr>
+                        }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Manage Exhibitions -->
+            <div class="dashboard-section">
+                <h3>Manage Exhibitions</h3>
+                <button class="btn-submit"><a asp-controller="Home" asp-action="CreateExhibitions">Create New Exhibition</a></button>
+
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Exhibition Name</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Exhibitions.Count == 0)
+                        {
+                            <tr>
+                                <td class="text-center" colspan="6">No exhibitions available.</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var exhibition in Model.Exhibitions)
+                            {
+                                <tr>
+                                    <td>@exhibition.Title</td>
+                                    <td>@exhibition.ExhibitionDate</td>
+                                    <td>@exhibition.Location</td>
+                                    <td>@exhibition.Status</td>
+                                    <td><img src="~/Uploads/images/@exhibition.Banner" alt="Competition image" height="50px" width="150px" /></td>
+                                    <td>
+                                        <button class="btn-small"><a asp-controller="Home" asp-action="UpdateExhibitions" asp-route-id="@exhibition.Id">Edit</a></button>
+                                        <button class="btn-small btn-danger"><a asp-controller="Home" asp-action="DeleteExhibitions" asp-route-id="@exhibition.Id">Delete</a></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Manage Paintings Sent to Exhibitions -->
+            <div class="dashboard-section">
+                <h3>Paintings Sent to Exhibitions</h3>
+
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Painting</th>
+                            <th>Student</th>
+                            <th>Exhibition</th>
+                            <th>Status</th>
+                            <th>Buyer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sunset Dreams</td>
+                            <td>Emma Watson</td>
+                            <td>Summer Arts 2025</td>
+                            <td>Sold</td>
+                            <td>Jane Doe</td>
+                        </tr>
+                        <tr>
+                            <td>City Lights</td>
+                            <td>John Doe</td>
+                            <td>Modern Art Fiesta</td>
+                            <td>Unsold</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+</main>
+<!-- Main Content End -->

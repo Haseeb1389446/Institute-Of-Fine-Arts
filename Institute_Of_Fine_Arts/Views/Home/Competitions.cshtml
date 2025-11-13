@@ -1,0 +1,103 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Competition>;
+
+<!-- Main Content Start -->
+<main class="main-content">
+    <section class="section">
+        <div class="container">
+            <h2>Competitions</h2>
+
+            <!-- Upcoming Competitions -->
+            <div class="dashboard-section">
+                <h3>Upcoming Competitions</h3>
+                <br />
+                @if (ViewBag.upcoming != null && ViewBag.upcoming.Count > 0)
+                {
+                    @foreach (var competition in ViewBag.upcoming)
+                    {
+                    <div class="competition-card">
+                    <div class="exhibition-image">
+                        @* <img src="https://placehold.co/800x300/d08c60/white?text=Annual+Art+Gala+2025" alt="Modern Art Showcase"> *@
+                        <img src="~/Uploads/images/@competition.Banner" alt="Modern Art Showcase">
+                    </div>
+                    <div class="competition-details">
+                    <h4>@competition.Title</h4>
+                                <p><strong>Start Date:</strong> @competition.StartDate</p>
+                                <p><strong>End Date:</strong> @competition.EndDate</p>
+                    <p><strong>Submissions:</strong> 120</p>
+                    <button class="btn-submit">Register</button>
+                    </div>
+                </div>    
+                    }
+                } else
+                {
+                    <p>No upcoming competitions available.</p>
+                }
+            </div>
+
+            <!-- Ongoing Competitions -->
+            <div class="dashboard-section">
+                <h3>Ongoing Competitions</h3>
+                <br />
+                @if (ViewBag.ongoing != null && ViewBag.ongoing.Count > 0)
+                {
+                    @foreach (var competition in ViewBag.ongoing)
+                    {
+                        <div class="competition-card">
+                            <div class="exhibition-image">
+                                @* <img src="https://placehold.co/800x300/d08c60/white?text=Annual+Art+Gala+2025" alt="Modern Art Showcase"> *@
+                                <img src="~/Uploads/images/@competition.Banner" alt="Modern Art Showcase">
+                            </div>
+                            <div class="competition-details">
+                                <h4>@competition.Title</h4>
+                                <p><strong>Start Date:</strong> @competition.StartDate</p>
+                                <p><strong>End Date:</strong> @competition.EndDate</p>
+                                <p><strong>Submissions:</strong> 120</p>
+                                <button class="btn-submit">Register</button>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No ongoing competitions available.</p>
+                }
+            </div>
+
+            <!-- Past Competitions -->
+            <div class="dashboard-section">
+                <h3>Past Competitions</h3>
+                <br />
+                @if (ViewBag.past != null && ViewBag.past.Count > 0)
+                {
+                    @foreach (var competition in ViewBag.past)
+                    {
+                        <div class="competition-card">
+                            <div class="exhibition-image">
+                                @* <img src="https://placehold.co/800x300/d08c60/white?text=Annual+Art+Gala+2025" alt="Modern Art Showcase"> *@
+                                <img src="~/Uploads/images/@competition.Banner" alt="Modern Art Showcase">
+                            </div>
+                            <div class="competition-details">
+                                <h4>@competition.Title</h4>
+                                <p><strong>Winner:</strong> @(competition.award?.Student?.UserName ?? "null") </p>
+                                <p><strong>Award:</strong> @competition.award?.AwardTitle</p>
+                                <button class="btn-submit">View Submissions</button>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No past competitions available.</p>
+                }
+            </div>
+
+        </div>
+    </section>
+</main>
+<!-- Main Content End -->

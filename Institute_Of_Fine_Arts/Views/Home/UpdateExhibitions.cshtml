@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Exhibition;
+
+<div class="createexhibition container mt-5 mb-5">
+    <h2>Update This Exhibition</h2>
+    <form method="POST" enctype="multipart/form-data" asp-controller="Home" asp-action="UpdateExhibitions">
+
+        <label for="title">Exhibition Title:</label>
+        <input type="text" id="title" asp-for="Title">
+        <span asp-validation-for="Title" style="color:red;"></span>
+
+        <label for="Exhibition_date">Exhibition Date:</label>
+        <input type="date" id="Exhibition_date" asp-for="ExhibitionDate">
+        <span asp-validation-for="ExhibitionDate" style="color:red;"></span>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" asp-for="Location">
+        <span asp-validation-for="Location" style="color:red;"></span>
+
+        <label for="award_status">Status:</label>
+        <select class="form-control" asp-for="Status">
+            <option>---- Select Status ----</option>
+            <option value="OnGoing">OnGoing</option>
+            <option value="UpComming">UpComming</option>
+            <option value="Completed">Completed</option>
+        </select>
+        <span asp-validation-for="Status" style="color:red;"></span>
+
+        <label for="banner">Upload Banner Image:</label>
+        <label for="banner" class="w-100" style="display: inline-block; padding: 6px 12px; background-color: #d1865c; color: white; cursor: pointer; border-radius: 4px; text-align: center;">Upload Banner</label>
+        <input hidden type="file" id="banner" name="exhibitionimage" />
+        <span asp-validation-for="Banner" style="color:red;"></span>
+
+        <button type="submit">Update Exhibition</button>
+    </form>
+</div>

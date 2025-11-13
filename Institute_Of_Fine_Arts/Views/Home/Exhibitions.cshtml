@@ -1,0 +1,63 @@
+﻿@model List<Exhibition>;
+
+<!-- Main Content Start -->
+<main class="main-content">
+    <section class="section">
+<div class="container">
+
+    <h2>Exhibitions</h2>
+<div class="dashboard-section">
+    <h3>UpComing Exhibitions</h3>
+    <br />
+    @if(ViewBag.upcoming != null && ViewBag.upcoming.Count > 0)
+     {
+                    @foreach (var exhibition in ViewBag.upcoming)
+                    {     
+                    <div class="exhibition-card">
+       <div class="exhibition-image">
+           <img src="~/Uploads/images/@exhibition.Banner" alt="Fine Arts Annual Exhibition">
+       </div>
+       <div class="exhibition-details">
+          <h4>@exhibition.Title</h4>
+          <p><strong>Exhibition Dates:</strong> @exhibition.ExhibitionDate</p>
+          <p><strong>Location:</strong> @exhibition.Location</p>
+          <p><strong>Paintings for Sale:</strong> 10</p>
+          <button class="btn-view">View Paintings</button>
+       </div>
+    </div>
+                    }
+                } else {
+                    <p>No upcoming exhibition available.</p>
+                }
+</div>
+
+<div class="dashboard-section">
+    <h3>Past Exhibitions</h3>
+    <br />
+    @if(ViewBag.past != null && ViewBag.past.Count > 0)
+     {
+                    @foreach (var exhibition in ViewBag.past)
+                    {
+                        <div class="exhibition-card">
+                            <div class="exhibition-image">
+                                <img src="~/Uploads/images/@exhibition.Banner" alt="Winter Art Extravaganza">
+                            </div>
+                            <div class="exhibition-details">
+                                <h4>@exhibition.Title</h4>
+                                <p><strong>Exhibition Dates:</strong> @exhibition.ExhibitionDate</p>
+                                <p><strong>Location:</strong> @exhibition.Location</p>
+                                <p><strong>Sold Paintings:</strong> 5</p>
+                                <p><strong>Unsold Paintings:</strong> 3</p>
+                                <button class="btn-view">View Paintings</button>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No past exhibition available.</p>
+                }
+            </div>
+</div>
+</section>
+</main>

@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Award;
+
+<div class="craeteawards container">
+    <h2>Create Award</h2>
+    <form method="post" asp-controller="Home" asp-action="CreateAwards">
+        <label for="awardName">Award Name</label>
+        <input type="text" id="awardName" asp-for="AwardTitle" placeholder="Enter award name">
+        <span asp-validation-for="AwardTitle" style="color: red;"></span>
+
+        <label for="dateGiven">Date Given</label>
+        <input type="date" asp-for="AwardedDate" id="dateGiven">
+        <span asp-validation-for="AwardedDate" style="color: red;"></span>
+
+        <label for="role">Select Winner:</label>
+        <select id="role" asp-for="StudentId" asp-items="@(new SelectList(ViewBag.students, "Id", "UserName"))">
+            <option value="">Student</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model LoginViewModel;
+
+<!-- Main Content Start -->
+<main class="main-content">
+    <section class="section">
+        <div class="container">
+            <h2>Login</h2>
+
+            <form class="login-form" asp-controller="Auth" asp-action="Login" method="POST">
+
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" asp-for="Email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" asp-for="Password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" style="display:inline; margin-bottom: 0;">Remember Me : </label>
+                    <input type="checkbox" style="width: 10%;" id="rememberme" asp-for="RememberMe" required>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn-submit">Login</button>
+                </div>
+
+                <p class="register-link">Create new account? <a asp-controller="Auth" asp-action="Register">Register</a></p>
+
+            </form>
+
+        </div>
+    </section>
+</main>
+<!-- Main Content End -->
