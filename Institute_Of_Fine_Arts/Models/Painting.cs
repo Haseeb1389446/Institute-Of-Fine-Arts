@@ -10,7 +10,7 @@ namespace Institute_Of_Fine_Arts.Models
             public int CompetitionId { get; set; }
 
             [Required]
-            public string? StudentId { get; set; } // Link with Identity User or Student Table
+            public string? StudentId { get; set; } 
 
             [Required]
             public string? DesignFilePath { get; set; }

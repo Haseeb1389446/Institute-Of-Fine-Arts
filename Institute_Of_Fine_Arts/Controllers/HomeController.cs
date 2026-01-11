@@ -21,6 +21,8 @@ namespace Institute_Of_Fine_Arts.Controllers
             _userManager = userManager;
         }
 
+        
+
         public IActionResult Index()
         {
             return View();
@@ -30,7 +32,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
         public IActionResult Competitions()
         {
-            var competitions = _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student).ToList();
+            var competitions = _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student ).ToList();
 
             ViewBag.upcoming =  competitions.Where(c => c.Status == "UpComming").ToList();
             ViewBag.ongoing = competitions.Where(c => c.Status == "OnGoing").ToList();
@@ -365,15 +367,78 @@ namespace Institute_Of_Fine_Arts.Controllers
             return View(model);
         }
 
-        public IActionResult Manager()
-        {
-            return View();
-        }
-
-        public IActionResult Admin()
+        public async Task<IActionResult> Manager()
         {
             var users = _userManager.Users.ToList();
+            var competitions = await _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student).ToListAsync();
+            var awards = await _Context.Awards.Include(user => user.Student).ToListAsync();
+
+            ViewBag.students = await _userManager.GetUsersInRoleAsync("Student");
+            ViewBag.staff = await _userManager.GetUsersInRoleAsync("Staff");
+            ViewBag.competitions = competitions;
+            ViewBag.awards = awards;
+
+            var exhibitions = _Context.Exhibitions.ToList();
+            ViewBag.upcoming = exhibitions.Where(e => e.Status == "UpComming").ToList();
+
             return View(users);
         }
+
+        // Admin
+
+        public async Task<IActionResult> Admin()
+        {
+            var users = _userManager.Users.ToList();
+
+            ViewBag.students = await _userManager.GetUsersInRoleAsync("Student");
+            ViewBag.staff = await _userManager.GetUsersInRoleAsync("Staff");
+
+            return View(users);
+        }
+
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user =  await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+                return NotFound();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(IdentityUser model)
+        {
+            var user = await _userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+                return NotFound();
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+                return RedirectToAction("Admin");
+
+            return BadRequest("Unable to Update User");
+        }
+
+        public async Task<IActionResult> DeleteUser(string id) {
+            var user =  await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+                return NotFound();
+
+            var result = await _userManager.DeleteAsync(user!);
+
+            if (result.Succeeded)
+                return RedirectToAction("Admin");
+
+            return View(user);
+        }
+
+        // Admin End
     }
 }

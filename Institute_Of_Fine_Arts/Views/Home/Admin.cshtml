@@ -12,28 +12,30 @@
             <!-- Manage Staff -->
             <div class="dashboard-section">
                 <h3>Manage Staff</h3>
-                <button class="btn-submit">Add New Staff Member</button>
+                <a class="btn-submit btn" asp-controller="Auth" asp-action="Register">Add New Staff Member</a>
 
                 <table class="dashboard-table">
                     <thead>
                         <tr>
                             <th>Staff Name</th>
                             <th>Email</th>
-                            <th>Department</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var user in Model)
+                        @if (ViewBag.staff != null && ViewBag.staff.Count > 0)
+                        {
+                            @foreach (var user in ViewBag.staff)
                         {
                         <tr>
                             <td>@user.UserName</td>
                             <td>@user.Email</td>
                             <td>
-                                <button class="btn-small">Edit</button>
-                                <button class="btn-small btn-danger">Delete</button>
+                                <button class="btn-small"><a asp-controller="Home" asp-action="EditUser" asp-route-id="@user.Id">Edit</a></button>
+                                <button class="btn-small btn-danger"><a asp-controller="Home" asp-action="DeleteUser" asp-route-id="@user.Id">Delete</a></button>
                             </td>
                         </tr>    
+                        }   
                         }
                     </tbody>
                 </table>
@@ -42,36 +44,31 @@
             <!-- Manage Students -->
             <div class="dashboard-section">
                 <h3>Manage Students</h3>
-                <button class="btn-submit">Add New Student</button>
+                <a class="btn-submit btn" asp-controller="Auth" asp-action="Register">Add New Student</a>
 
                 <table class="dashboard-table">
                     <thead>
                         <tr>
                             <th>Student Name</th>
                             <th>Email</th>
-                            <th>Course</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Emma Watson</td>
-                            <td>emma@student.com</td>
-                            <td>Fine Arts Diploma</td>
-                            <td>
-                                <button class="btn-small">Edit</button>
-                                <button class="btn-small btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>john@student.com</td>
-                            <td>Bachelor of Arts</td>
-                            <td>
-                                <button class="btn-small">Edit</button>
-                                <button class="btn-small btn-danger">Delete</button>
-                            </td>
-                        </tr>
+                        @if (ViewBag.Students != null && ViewBag.Students.Count > 0)
+                        {
+                            @foreach (var user in ViewBag.Students)
+                            {
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    <td>@user.Email</td>
+                                    <td>
+                                        <button class="btn-small"><a asp-controller="Home" asp-action="EditUser" asp-route-id="@user.Id">Edit</a></button>
+                                        <button class="btn-small btn-danger"><a asp-controller="Home" asp-action="DeleteUser" asp-route-id="@user.Id">Delete</a></button>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>

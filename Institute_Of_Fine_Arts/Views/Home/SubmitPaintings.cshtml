@@ -6,6 +6,18 @@
 <div class="submitpantings container">
     <h2>Submit Your Artwork</h2>
     <form class="register-form" method="POST" enctype="multipart/form-data">
+        <label for="title">Description:</label>
+        <input type="text " name="title" id="title" required />
+
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" rows="4" required></textarea>
+
+        <label for="submission_date">Submission Date:</label>
+        <input type="date" name="submission_date" id="submission_date" required />
+
+        <label for="remarks">Remarks (optional):</label>
+        <textarea name="remarks" id="remarks" rows="3"></textarea>
+
         <label for="competition">Select Competition:</label>
         <select name="competition_id" id="competition" required>
             <option value="">--Select Competition--</option>
@@ -16,15 +28,6 @@
 
         <label for="image">Upload Artwork:</label>
         <input type="file" name="image" id="image" accept="image/*" required />
-
-        <label for="description">Description:</label>
-        <textarea name="description" id="description" rows="4" required></textarea>
-
-        <label for="submission_date">Submission Date:</label>
-        <input type="date" name="submission_date" id="submission_date" required />
-
-        <label for="remarks">Remarks (optional):</label>
-        <textarea name="remarks" id="remarks" rows="3"></textarea>
 
         <button class="register-link" type="submit">Submit Painting</button>
     </form>

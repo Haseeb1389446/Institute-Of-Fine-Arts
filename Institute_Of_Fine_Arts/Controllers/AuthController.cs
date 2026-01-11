@@ -50,7 +50,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                     if (roles.Contains("Student"))
                         return RedirectToAction("Student", "Home");
 
-                    return RedirectToAction("Index", "Home"); // fallback
+                    return RedirectToAction("Index", "Home");
                 }
             }
 
@@ -133,7 +133,14 @@ namespace Institute_Of_Fine_Arts.Controllers
                             await _userManager.AddToRoleAsync(user, role.Name!);
                         }
 
-                        return RedirectToAction("Login", "Auth");
+                        if (User.IsInRole("Admin"))
+                        {
+                            return RedirectToAction("Admin", "Home");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Login", "Auth");
+                        }
                     }
                 }
             }

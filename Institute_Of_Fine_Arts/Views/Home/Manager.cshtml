@@ -21,16 +21,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Emma Watson</td>
-                            <td>emma@student.com</td>
-                            <td>Fine Arts Diploma</td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>john@student.com</td>
-                            <td>Bachelor of Arts</td>
-                        </tr>
+                        @if (ViewBag.Students != null && ViewBag.Students.Count > 0)
+                        {
+                            @foreach (var user in ViewBag.Students)
+                            {
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    <td>@user.Email</td>
+                                    <td>Bachelor of Arts</td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
@@ -47,16 +48,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Olivia Smith</td>
-                            <td>olivia@finearts.com</td>
-                            <td>Painting</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Johnson</td>
-                            <td>michael@finearts.com</td>
-                            <td>Sculpture</td>
-                        </tr>
+                        @if (ViewBag.staff != null && ViewBag.staff.Count > 0)
+                        {
+                            @foreach (var user in ViewBag.staff)
+                            {
+                                <tr>
+                                    <td>@user.UserName</td>
+                                    <td>@user.Email</td>
+                                    <td>Sculpture</td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
@@ -73,15 +75,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Annual Art Gala 2025</td>
-                            <td>March 10, 2025</td>
-                            <td>120</td>
-                        </tr>
+                        @if (ViewBag.competitions != null && ViewBag.competitions.Count > 0)
+                        {
+                            @foreach (var competitions in ViewBag.competitions)
+                            {
+                                <tr>
+                                    <td>@competitions.Title</td>
+                                    <td>@competitions.StartDate</td>
+                                    <td>80</td>
+                                </tr>
+                            }
+                        }
                         <tr>
                             <td>Modern Expressionism Contest</td>
                             <td>April 5, 2025</td>
-                            <td>80</td>
                         </tr>
                     </tbody>
                 </table>
@@ -99,11 +106,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Emma Watson</td>
-                            <td>Best Creative Painting</td>
-                            <td>Annual Art Gala 2025</td>
-                        </tr>
+                        @if (ViewBag.awards != null && ViewBag.awards.Count > 0)
+                        {
+                            @foreach (var awards in ViewBag.awards)
+                            {
+                                <tr>
+                                    <td>@awards.AwardTitle</td>
+                                    <td>@awards.AwardedDate</td>
+                                    <td>80</td>
+                                </tr>
+                            }
+                        }
                         <tr>
                             <td>John Doe</td>
                             <td>Most Innovative Art</td>
@@ -168,10 +181,15 @@
             <!-- Upcoming Exhibitions -->
             <div class="dashboard-section">
                 <h3>Upcoming Exhibitions</h3>
-                <ul class="upcoming-list">
-                    <li>Fine Arts Annual Exhibition - May 2025</li>
-                    <li>Contemporary Art Showcase - June 2025</li>
-                </ul>
+                @if (ViewBag.upcoming != null && ViewBag.upcoming.Count > 0)
+                {
+                    @foreach (var exhibition in ViewBag.upcoming)
+                    {
+                        <ul class="upcoming-list">
+                            <li>@exhibition.Title - @exhibition.ExhibitionDate</li>
+                        </ul>
+                    }
+                }
             </div>
 
         </div>
