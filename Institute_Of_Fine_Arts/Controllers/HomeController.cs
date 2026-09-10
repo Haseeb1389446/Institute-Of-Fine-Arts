@@ -345,15 +345,15 @@ namespace Institute_Of_Fine_Arts.Controllers
         public IActionResult SubmitPaintings()
         {
             ViewData["UserId"] = _userManager.GetUserId(User);
-            TempData["competitions"] = _Context.Competitions.Where(w => w.Status == "OnGoing").ToList();
+            ViewBag.competitions = _Context.Competitions.Where(w => w.Status == "OnGoing").ToList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult SubmitPaintings(Painting painting, IFormFile paintingimage)
+        public async Task<IActionResult> SubmitPaintings(Painting painting, IFormFile paintingimage)
         {
             ViewData["UserId"] = _userManager.GetUserId(User);
-            TempData["competitions"] = _Context.Competitions.Where(w => w.Status == "OnGoing").ToList();
+            ViewBag.competitions = _Context.Competitions.Where(w => w.Status == "OnGoing").ToList();
 
             if (ModelState.IsValid && paintingimage != null && paintingimage.Length > 0)
             {
@@ -366,15 +366,66 @@ namespace Institute_Of_Fine_Arts.Controllers
                 var fileLocation = Path.Combine(location, paintingimage.FileName);
                 using (var stream = new FileStream(fileLocation, FileMode.Create))
                 {
-                    paintingimage.CopyToAsync(stream);
+                    await paintingimage.CopyToAsync(stream);
                 }
                 painting.PaintingImage = paintingimage.FileName;
                 _Context.Paintings.Add(painting);
                 _Context.SaveChanges();
                 return RedirectToAction("ViewPaintings");
             }
+            return View();
+        }
+
+        public IActionResult UpdatePainting(int id)
+        {
+            ViewData["UserId"] = _userManager.GetUserId(User);
+            ViewBag.competitions = _Context.Competitions.Where(w => w.Status == "OnGoing").ToList();
+
+            //HttpContext.
+
+            var painting = _Context.Paintings.Find(id);
+            return View(painting);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePainting(Painting painting, IFormFile paintingimage)
+        {
+            ViewData["UserId"] = _userManager.GetUserId(User);
+            ViewBag.competitions = _Context.Competitions.Where(w => w.Status == "OnGoing").ToList();
+
+            if (ModelState.IsValid && paintingimage != null && paintingimage.Length > 0)
+            {
+                var rootPath = _root.WebRootPath;
+                var location = Path.Combine(rootPath, "Uploads", "paintings");
+
+                if (!Directory.Exists(location))
+                {
+                    Directory.CreateDirectory(location);
+                }
+
+
+
+                var fileLocation = Path.Combine(location, paintingimage.FileName);
+                using (var stream = new FileStream(fileLocation, FileMode.Create))
+                {
+                    await paintingimage.CopyToAsync(stream);
+                }
+
+                painting.PaintingImage = paintingimage.FileName;
+                _Context.Entry(painting).State = EntityState.Modified;
+                _Context.SaveChanges();
+                return RedirectToAction("ViewPaintings");
+            }
 
             return View();
+        }
+
+        public IActionResult DeletePainting(int id)
+        {
+            var painting = _Context.Paintings.Find(id);
+            _Context.Paintings.Remove(painting!);
+            _Context.SaveChanges();
+            return RedirectToAction("StudentDashboard");
         }
 
         public IActionResult ViewPaintings()
@@ -387,7 +438,20 @@ namespace Institute_Of_Fine_Arts.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Student()
+        public async Task<IActionResult> StudentDashboard()
+        {
+            var model = new ModelsCollectionVeiewModel
+            {
+                Awards = await _Context.Awards.Include(user => user.Student).ToListAsync(),
+                Competitions = await _Context.Competitions.Include(res => res.award).ToListAsync(),
+                Exhibitions = await _Context.Exhibitions.ToListAsync(),
+                Paintings = await _Context.Paintings.ToListAsync()
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> StaffDashboard()
         {
             var model = new ModelsCollectionVeiewModel
             {
@@ -400,20 +464,7 @@ namespace Institute_Of_Fine_Arts.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Staff()
-        {
-            var model = new ModelsCollectionVeiewModel
-            {
-                Awards = await _Context.Awards.Include(user => user.Student).ToListAsync(),
-                Competitions = await _Context.Competitions.Include(res => res.award).ToListAsync(),
-                Exhibitions = await _Context.Exhibitions.ToListAsync()
-                //Competitions = await _Context.Competitions.ToListAsync()
-            };
-
-            return View(model);
-        }
-
-        public async Task<IActionResult> Manager()
+        public async Task<IActionResult> ManagerDashboard()
         {
             var users = _userManager.Users.ToList();
             var competitions = await _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student).ToListAsync();
@@ -432,7 +483,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
         // Admin
 
-        public async Task<IActionResult> Admin()
+        public async Task<IActionResult> AdminDashboard()
         {
             var users = _userManager.Users.ToList();
 

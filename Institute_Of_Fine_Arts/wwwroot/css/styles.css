@@ -1293,7 +1293,7 @@ body {
    SECTION HEADING
 ========================================================= */
 
-.section-heading {
+.home-page .section-heading {
     max-width: 650px;
     margin: 0 auto 65px;
     text-align: center;
@@ -3060,6 +3060,13 @@ footer .col-lg-4 p {
     justify-content: center;
     background: var(--student-soft);
     color: var(--student-primary);
+    border-radius: 8px;
+}
+
+.painting-icon img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 8px;
 }
 
@@ -9394,12 +9401,12 @@ footer .col-lg-4 p {
     padding: 70px 0 100px;
 }
 
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 35px;
-}
+    .paintings-section .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 35px;
+    }
 
     .section-heading span {
         color: #b8734e;
@@ -9643,10 +9650,15 @@ footer .col-lg-4 p {
     transition: all .3s ease;
 }
 
-    .artwork-btn:hover {
-        background: #4f3021;
-        transform: translateY(-2px);
+    .artwork-btn a {
+        text-decoration: none;
+        color: white;
     }
+
+.artwork-btn:hover {
+    background: #4f3021;
+    transform: translateY(-2px);
+}
 
     .artwork-btn i {
         margin-right: 7px;

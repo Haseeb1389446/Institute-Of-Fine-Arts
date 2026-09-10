@@ -8,7 +8,7 @@
 
         public List<Exhibition> Exhibitions { get; set; }
 
-        public List<Painting> Painting { get; set; }
+        public List<Painting> Paintings { get; set; }
 
     }
 }

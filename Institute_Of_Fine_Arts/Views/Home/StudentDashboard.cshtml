@@ -185,82 +185,39 @@
 
                 <tbody>
 
-                    <tr>
-                        <td>
-                            <div class="painting-name">
-                                <div class="painting-icon">
-                                    <i class="fas fa-image"></i>
+                    @foreach (var painting in Model.Paintings)
+                    {
+                        <tr>
+                            <td>
+                                <div class="painting-name">
+                                    <div class="painting-icon">
+                                        <img src="~/Uploads/paintings/@painting.PaintingImage" height="60px" width="60px" alt="Alternate Text" />
+                                    </div>
+                                    <strong>@painting.PaintingName</strong>
                                 </div>
-
-                                <strong>Sunset Dreams</strong>
-                            </div>
-                        </td>
-
-                        <td>Oil painting with sunset scenery</td>
-
-                        <td>April 5, 2025</td>
-
-                        <td>
-                            <span class="table-status reviewed">
-                                Reviewed
-                            </span>
-                        </td>
-
-                        <td>
-                            <div class="table-actions">
-                                <button class="action-btn">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-
-                                <button class="action-btn">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-
-                                <button class="action-btn delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>
-                            <div class="painting-name">
-                                <div class="painting-icon">
-                                    <i class="fas fa-image"></i>
+                            </td>
+                            <td>@painting.Description</td>
+                            <td>@painting.DatePosted</td>
+                            <td>
+                                <span class="table-status">
+                                    
+                                </span>
+                            </td>
+                            <td>
+                                <div class="table-actions">
+                                    <a class="action-btn" asp-controller="Home" asp-action="PaintingDetails" asp-route-id="@painting.Id">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a class="action-btn" asp-controller="Home" asp-action="UpdatePainting" asp-route-id="@painting.Id">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a class="action-btn delete" asp-controller="Home" asp-action="DeletePainting" asp-route-id="@painting.Id">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                                 </div>
-
-                                <strong>City Lights</strong>
-                            </div>
-                        </td>
-
-                        <td>Modern cityscape in watercolor</td>
-
-                        <td>April 20, 2025</td>
-
-                        <td>
-                            <span class="table-status pending">
-                                Pending
-                            </span>
-                        </td>
-
-                        <td>
-                            <div class="table-actions">
-                                <button class="action-btn">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-
-                                <button class="action-btn">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-
-                                <button class="action-btn delete">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    }
 
                 </tbody>
 
