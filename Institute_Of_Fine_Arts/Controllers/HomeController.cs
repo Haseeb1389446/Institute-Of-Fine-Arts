@@ -77,7 +77,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                 await _Context.Competitions.AddAsync(competition);
                 await _Context.SaveChangesAsync();
 
-                return RedirectToAction("staff");
+                return RedirectToAction("staffDashboard");
             }
 
                 return View();
@@ -127,7 +127,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                 _Context.Entry(competition).State = EntityState.Modified;
                 await _Context.SaveChangesAsync();
 
-                return RedirectToAction("staff");
+                return RedirectToAction("staffDashboard");
             }
             else
             {
@@ -136,7 +136,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
                 _Context.Entry(competition).State = EntityState.Modified;
                 await _Context.SaveChangesAsync();
-                return RedirectToAction("staff");
+                return RedirectToAction("staffDashboard");
             }
         }
 
@@ -146,7 +146,7 @@ namespace Institute_Of_Fine_Arts.Controllers
             _Context.Competitions.Remove(competition!);
             await _Context.SaveChangesAsync();
 
-            return RedirectToAction("staff");
+            return RedirectToAction("staffDashboard");
         }
 
         // Competitions End
@@ -193,7 +193,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                 await _Context.Exhibitions.AddAsync(exhibition);
                 await _Context.SaveChangesAsync();
 
-                return RedirectToAction("staff");
+                return RedirectToAction("staffDashboard");
             }
             return View();
         }
@@ -238,7 +238,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                 _Context.Entry(exhibition).State = EntityState.Modified;
                 await _Context.SaveChangesAsync();
 
-                return RedirectToAction("staff");
+                return RedirectToAction("staffDashboard");
             }
             else
             {
@@ -247,7 +247,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
                 _Context.Entry(exhibition).State = EntityState.Modified;
                 await _Context.SaveChangesAsync();
-                return RedirectToAction("staff");
+                return RedirectToAction("staffDashboard");
             }
         }
 
@@ -257,7 +257,7 @@ namespace Institute_Of_Fine_Arts.Controllers
             _Context.Exhibitions.Remove(exhibition!);
             await _Context.SaveChangesAsync();
 
-            return RedirectToAction("staff");
+            return RedirectToAction("staffDashboard");
         }
 
         // Exhibitions End
@@ -289,7 +289,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                 await _Context.Awards.AddAsync(award);
                 await _Context.SaveChangesAsync();
 
-                return RedirectToAction("Staff");
+                return RedirectToAction("StaffDashboard");
             }
 
             return View();
@@ -315,7 +315,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                 _Context.Awards.Update(award);
                 await _Context.SaveChangesAsync();
 
-                return RedirectToAction("Staff");
+                return RedirectToAction("StaffDashboard");
             }
 
             return View();
@@ -324,10 +324,10 @@ namespace Institute_Of_Fine_Arts.Controllers
         public async Task<IActionResult> DeleteAwards(int id)
         {
             var award = await _Context.Awards.FindAsync(id);
-            _Context.Awards.Remove(award);
+            _Context.Awards.Remove(award!);
             await _Context.SaveChangesAsync();
 
-            return RedirectToAction("Staff");
+            return RedirectToAction("StaffDashboard");
         }
 
         // Awards End
@@ -381,9 +381,8 @@ namespace Institute_Of_Fine_Arts.Controllers
             ViewData["UserId"] = _userManager.GetUserId(User);
             ViewBag.competitions = _Context.Competitions.Where(w => w.Status == "OnGoing").ToList();
 
-            //HttpContext.
-
             var painting = _Context.Paintings.Find(id);
+            HttpContext.Session.SetString("previouseimage", painting!.PaintingImage!);
             return View(painting);
         }
 
@@ -403,10 +402,16 @@ namespace Institute_Of_Fine_Arts.Controllers
                     Directory.CreateDirectory(location);
                 }
 
+                var oldFileLocation = HttpContext.Session.GetString("previouseimage");
 
+                if(System.IO.File.Exists(oldFileLocation))
+                {
+                    var oldFilePath = Path.Combine(location, oldFileLocation!);
+                    System.IO.File.Delete(oldFilePath);
+                }
 
-                var fileLocation = Path.Combine(location, paintingimage.FileName);
-                using (var stream = new FileStream(fileLocation, FileMode.Create))
+                var newfileLocation = Path.Combine(location, paintingimage.FileName);
+                using (var stream = new FileStream(newfileLocation, FileMode.Create))
                 {
                     await paintingimage.CopyToAsync(stream);
                 }
@@ -415,9 +420,14 @@ namespace Institute_Of_Fine_Arts.Controllers
                 _Context.Entry(painting).State = EntityState.Modified;
                 _Context.SaveChanges();
                 return RedirectToAction("ViewPaintings");
+            } else
+            {
+                var previouseImage = HttpContext.Session.GetString("previouseimage");
+                painting.PaintingImage = previouseImage;
+                _Context.Entry(painting).State = EntityState.Modified;
+                _Context.SaveChanges();
+                return RedirectToAction("ViewPaintings");
             }
-
-            return View();
         }
 
         public IActionResult DeletePainting(int id)
@@ -517,7 +527,7 @@ namespace Institute_Of_Fine_Arts.Controllers
             var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
-                return RedirectToAction("Admin");
+                return RedirectToAction("AdminDashboard");
 
             return BadRequest("Unable to Update User");
         }
@@ -531,7 +541,7 @@ namespace Institute_Of_Fine_Arts.Controllers
             var result = await _userManager.DeleteAsync(user!);
 
             if (result.Succeeded)
-                return RedirectToAction("Admin");
+                return RedirectToAction("AdminDashboard");
 
             return View(user);
         }

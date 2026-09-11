@@ -40,16 +40,16 @@ namespace Institute_Of_Fine_Arts.Controllers
                     var roles = await _userManager.GetRolesAsync(user);
 
                     if (roles.Contains("Admin"))
-                        return RedirectToAction("Admin", "Home");
+                        return RedirectToAction("AdminDashboard", "Home");
 
                     if (roles.Contains("Manager"))
-                        return RedirectToAction("Manager", "Home");
+                        return RedirectToAction("ManagerDashboard", "Home");
 
                     if (roles.Contains("Staff"))
-                        return RedirectToAction("Staff", "Home");
+                        return RedirectToAction("StaffDashboard", "Home");
 
                     if (roles.Contains("Student"))
-                        return RedirectToAction("Student", "Home");
+                        return RedirectToAction("StudentDashboard", "Home");
 
                     return RedirectToAction("Index", "Home");
                 }
