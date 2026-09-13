@@ -443,9 +443,10 @@ namespace Institute_Of_Fine_Arts.Controllers
             return View();
         }
         
-        public IActionResult PaintingDetails()
+        public IActionResult PaintingDetails(int id)
         {
-            return View();
+            var painting = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).Include(w => w.Award).FirstOrDefault(p => p.Id == id);
+            return View(painting);
         }
 
         public async Task<IActionResult> StudentDashboard()
