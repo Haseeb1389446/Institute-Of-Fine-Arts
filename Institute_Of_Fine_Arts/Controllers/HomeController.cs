@@ -35,7 +35,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
         public IActionResult Competitions()
         {
-            var competitions = _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student ).ToList();
+            var competitions = _Context.Competitions.Include(res => res.award).ThenInclude(s => s!.Student).ToList();
 
             ViewBag.upcoming =  competitions.Where(c => c.Status == "UpComming").ToList();
             ViewBag.ongoing = competitions.Where(c => c.Status == "OnGoing").ToList();
@@ -266,7 +266,10 @@ namespace Institute_Of_Fine_Arts.Controllers
 
         public IActionResult Awards()
         {
-            var awards = _Context.Awards.ToList();
+            var awards = _Context.Awards.Include(s => s.Student).ToList();
+            var winners = _Context.Awards.Include(c => c.Competition).Where(w => w.StudentId != null).ToList();
+
+            ViewBag.winners = winners;
             return View(awards);
         }
 
@@ -440,12 +443,17 @@ namespace Institute_Of_Fine_Arts.Controllers
 
         public IActionResult ViewPaintings()
         {
-            return View();
+            var paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
+            return View(paintings);
         }
         
         public IActionResult PaintingDetails(int id)
         {
-            var painting = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).Include(w => w.Award).FirstOrDefault(p => p.Id == id);
+            var painting = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).FirstOrDefault(p => p.Id == id);
+            var award = (painting == null) ? null : _Context.Awards.Where(a => a.StudentId == painting.StudentId)
+            .OrderByDescending(a => a.AwardedDate).FirstOrDefault();
+
+            ViewBag.Award = award!.AwardTitle;
             return View(painting);
         }
 
@@ -453,12 +461,13 @@ namespace Institute_Of_Fine_Arts.Controllers
         {
             var model = new ModelsCollectionVeiewModel
             {
-                Awards = await _Context.Awards.Include(user => user.Student).ToListAsync(),
+                Awards = await _Context.Awards.Include(user => user.Student).Include(c => c.Competition).Where(user => user.Student!.UserName == User.Identity!.Name).ToListAsync(),
                 Competitions = await _Context.Competitions.Include(res => res.award).ToListAsync(),
                 Exhibitions = await _Context.Exhibitions.ToListAsync(),
                 Paintings = await _Context.Paintings.ToListAsync()
             };
 
+            ViewBag.upcoming = model.Competitions.Where(c => c.Status == "UpComming").ToList();
             return View(model);
         }
 
@@ -478,16 +487,14 @@ namespace Institute_Of_Fine_Arts.Controllers
         public async Task<IActionResult> ManagerDashboard()
         {
             var users = _userManager.Users.ToList();
-            var competitions = await _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student).ToListAsync();
-            var awards = await _Context.Awards.Include(user => user.Student).ToListAsync();
 
             ViewBag.students = await _userManager.GetUsersInRoleAsync("Student");
             ViewBag.staff = await _userManager.GetUsersInRoleAsync("Staff");
-            ViewBag.competitions = competitions;
-            ViewBag.awards = awards;
 
-            var exhibitions = _Context.Exhibitions.ToList();
-            ViewBag.upcoming = exhibitions.Where(e => e.Status == "UpComming").ToList();
+            ViewBag.competitions = await _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student).ToListAsync();
+            ViewBag.awards = await _Context.Awards.Include(user => user.Student).ToListAsync();
+
+            ViewBag.upcoming = _Context.Exhibitions.Where(e => e.Status == "UpComming").ToList();
 
             return View(users);
         }

@@ -65,7 +65,7 @@
                         <div class="grade-box">
                             <small>GRADE</small>
                             <strong>
-                                @(string.IsNullOrEmpty(Model.Award!.AwardTitle) ? "N/A" : Model.Award.AwardTitle)
+                                @(ViewBag.Award ?? "N/A" )
                             </strong>
                         </div>
 
@@ -133,8 +133,8 @@
 
 
                     <!-- Poem / Quote -->
-                    @* @if (!string.IsNullOrEmpty(Model.PoemOrQuote))
-                    { *@
+                    @if (!string.IsNullOrEmpty(Model.PoemOrQuote))
+                    {
                         <div class="quote-box">
 
                             <i class="fas fa-quote-left"></i>
@@ -148,12 +148,12 @@
                             </div>
 
                         </div>
-                    @* } *@
+                    }
 
 
                     <!-- Remarks -->
                     @* @if (!string.IsNullOrEmpty(Model.Remarks)) 
-                    {*@
+                    { *@
                     <div class="remarks-box">
 
                         <div class="remarks-icon">

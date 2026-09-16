@@ -17,5 +17,9 @@ namespace Institute_Of_Fine_Arts.Models
         public string? StudentId { get; set; }
 
         public IdentityUser? Student { get; set; }
+
+        //public string? CompetitionId { get; set; }
+
+        public Competition? Competition { get; set; }
     }
 }

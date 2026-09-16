@@ -21,8 +21,6 @@ namespace Institute_Of_Fine_Arts.Models
 
         public int CompetitionId { get; set; }
 
-        public int AwardId { get; set; }
-
         public string? PaintingImage { get; set; }
 
         public DateTime DatePosted { get; set; } = DateTime.Now;
@@ -32,8 +30,5 @@ namespace Institute_Of_Fine_Arts.Models
 
         [ForeignKey("StudentId")]
         public IdentityUser? Student { get; set; }
-
-        [ForeignKey("AwardId")]
-        public Award? Award { get; set; }
     }
 }

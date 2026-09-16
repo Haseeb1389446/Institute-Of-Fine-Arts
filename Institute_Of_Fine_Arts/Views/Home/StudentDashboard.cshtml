@@ -32,7 +32,7 @@
             </div>
             <div>
                 <span>Total Paintings</span>
-                <strong>12</strong>
+                <strong>@Model.Paintings.Count</strong>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             </div>
             <div>
                 <span>Competitions</span>
-                <strong>5</strong>
+                <strong>@Model.Competitions.Count</strong>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
             </div>
             <div>
                 <span>Awards Won</span>
-                <strong>3</strong>
+                <strong>@Model.Awards.Count</strong>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
             </div>
             <div>
                 <span>Exhibitions</span>
-                <strong>4</strong>
+                <strong>@Model.Exhibitions.Count</strong>
             </div>
         </div>
 
@@ -87,17 +87,19 @@
 
         <div class="competition-list">
 
+            @foreach (var competition in ViewBag.upcoming)
+            {
             <div class="competition-item">
                 <div class="competition-date">
-                    <strong>25</strong>
-                    <span>MAY</span>
+                        <strong>@competition.StartDate.Day</strong>
+                        <span>@competition.StartDate.Month</span>
                 </div>
 
                 <div class="competition-info">
-                    <h4>Annual Art Gala</h4>
+                        <h4>@competition.Title</h4>
                     <p>
                         <i class="far fa-calendar"></i>
-                        25th May 2025
+                            @competition.StartDate.ToString("MMMM dd, yyyy")
                     </p>
                 </div>
 
@@ -105,46 +107,7 @@
                     Upcoming
                 </span>
             </div>
-
-
-            <div class="competition-item">
-                <div class="competition-date">
-                    <strong>10</strong>
-                    <span>JUN</span>
-                </div>
-
-                <div class="competition-info">
-                    <h4>Modern Expressionism Contest</h4>
-                    <p>
-                        <i class="far fa-calendar"></i>
-                        10th June 2025
-                    </p>
-                </div>
-
-                <span class="status-badge upcoming">
-                    Upcoming
-                </span>
-            </div>
-
-
-            <div class="competition-item">
-                <div class="competition-date">
-                    <strong>01</strong>
-                    <span>JUL</span>
-                </div>
-
-                <div class="competition-info">
-                    <h4>Sketching Skills Challenge</h4>
-                    <p>
-                        <i class="far fa-calendar"></i>
-                        1st July 2025
-                    </p>
-                </div>
-
-                <span class="status-badge upcoming">
-                    Upcoming
-                </span>
-            </div>
+            }
 
         </div>
 
@@ -197,7 +160,7 @@
                                 </div>
                             </td>
                             <td>@painting.Description</td>
-                            <td>@painting.DatePosted</td>
+                            <td>@painting.DatePosted.ToString("MMMM dd, yyyy")</td>
                             <td>
                                 <span class="table-status">
                                     
@@ -245,28 +208,19 @@
 
             <div class="award-list">
 
+                @foreach (var award in Model.Awards)
+                {
                 <div class="award-item">
                     <div class="award-icon">
                         <i class="fas fa-trophy"></i>
                     </div>
 
                     <div>
-                        <h4>1st Prize</h4>
-                        <p>Portrait Masters 2024</p>
+                            <h4>@award.AwardTitle</h4>
+                        <p>@award.Competition.Title</p>
                     </div>
                 </div>
-
-
-                <div class="award-item">
-                    <div class="award-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-
-                    <div>
-                        <h4>Best Creativity Award</h4>
-                        <p>Spring Exhibition 2023</p>
-                    </div>
-                </div>
+                }
 
             </div>
 

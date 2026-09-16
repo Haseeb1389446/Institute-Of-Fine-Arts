@@ -39,10 +39,6 @@
                         </p>
                     </div>
 
-                    <div class="award-arrow">
-                        →
-                    </div>
-
                 </div>
             }
 
@@ -62,50 +58,10 @@
             </p>
         </div>
 
-
         <div class="winner-grid">
 
-            <div class="winner-card">
-
-                <div class="winner-image">
-                    <div class="winner-badge">WINNER</div>
-
-                    <div class="trophy-icon">
-                        🏆
-                    </div>
-                </div>
-
-                <div class="winner-content">
-
-                    <span class="winner-year">2024</span>
-
-                    <h3>Annual Art Gala</h3>
-
-                    <div class="winner-info">
-                        <p>
-                            <strong>Winner</strong>
-                            Olivia Smith
-                        </p>
-
-                        <p>
-                            <strong>Award</strong>
-                            Best Abstract Art
-                        </p>
-
-                        <p>
-                            <strong>Date</strong>
-                            March 15, 2024
-                        </p>
-                    </div>
-
-                    <a href="#" class="view-btn">
-                        View Submission
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </div>
+        @foreach (var winner in ViewBag.winners)
+        {    
 
             <div class="winner-card">
 
@@ -119,27 +75,25 @@
 
                 <div class="winner-content">
 
-                    <span class="winner-year">2024</span>
+                        <span class="winner-year">@winner.AwardedDate.Year</span>
 
-                    <h3>Modern Expressionism Contest</h3>
+                        <h3>@winner.Competition.Title</h3>
 
                     <div class="winner-info">
-
                         <p>
                             <strong>Winner</strong>
-                            John Doe
+                                @winner.Student!.UserName
                         </p>
 
                         <p>
                             <strong>Award</strong>
-                            Most Creative Painting
+                                @winner.AwardTitle
                         </p>
 
                         <p>
                             <strong>Date</strong>
-                            April 10, 2024
+                                @winner.AwardedDate.ToString("MMMM dd, yyyy")
                         </p>
-
                     </div>
 
                     <a href="#" class="view-btn">
@@ -151,49 +105,7 @@
 
             </div>
 
-            <div class="winner-card">
-
-                <div class="winner-image">
-                    <div class="winner-badge">WINNER</div>
-
-                    <div class="trophy-icon">
-                        🏆
-                    </div>
-                </div>
-
-                <div class="winner-content">
-
-                    <span class="winner-year">2024</span>
-
-                    <h3>Spring Art Exhibition</h3>
-
-                    <div class="winner-info">
-
-                        <p>
-                            <strong>Winner</strong>
-                            Emily Johnson
-                        </p>
-
-                        <p>
-                            <strong>Award</strong>
-                            Best Digital Art
-                        </p>
-
-                        <p>
-                            <strong>Date</strong>
-                            May 25, 2024
-                        </p>
-
-                    </div>
-
-                    <a href="#" class="view-btn">
-                        View Submission
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </div>
+        }
 
         </div>
 
@@ -214,7 +126,7 @@
                 showcase your creativity.
             </p>
 
-            <a href="#" class="cta-btn">
+            <a asp-controller="Home" asp-action="Competitions" class="cta-btn">
                 Explore Competitions →
             </a>
         </div>

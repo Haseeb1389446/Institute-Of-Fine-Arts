@@ -44,7 +44,7 @@ namespace Institute_Of_Fine_Arts.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Awards");
+                    b.ToTable("Awards", (string)null);
                 });
 
             modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Competition", b =>
@@ -83,7 +83,7 @@ namespace Institute_Of_Fine_Arts.Migrations
 
                     b.HasIndex("AwardId");
 
-                    b.ToTable("Competitions");
+                    b.ToTable("Competitions", (string)null);
                 });
 
             modelBuilder.Entity("Institute_Of_Fine_Arts.Models.ExhibitedPainting", b =>
@@ -126,7 +126,7 @@ namespace Institute_Of_Fine_Arts.Migrations
 
                     b.HasIndex("paintingId");
 
-                    b.ToTable("ExhibitedPaintings");
+                    b.ToTable("ExhibitedPaintings", (string)null);
                 });
 
             modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Exhibition", b =>
@@ -157,7 +157,7 @@ namespace Institute_Of_Fine_Arts.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Exhibitions");
+                    b.ToTable("Exhibitions", (string)null);
                 });
 
             modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Painting", b =>
@@ -195,7 +195,7 @@ namespace Institute_Of_Fine_Arts.Migrations
 
                     b.HasIndex("CompetitionId");
 
-                    b.ToTable("Paintings");
+                    b.ToTable("Paintings", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -374,7 +374,7 @@
                                 <td>
                                     <span class="date-badge">
                                         <i class="far fa-calendar"></i>
-                                        @competitions.StartDate
+                                        @competitions.StartDate.ToString("MMM dd, yyyy") - @competitions.EndDate.ToString("MMM dd, yyyy")
                                     </span>
                                 </td>
 
@@ -472,7 +472,7 @@
                                 <td>
                                     <span class="date-badge">
                                         <i class="far fa-calendar"></i>
-                                        @awards.AwardedDate
+                                        @awards.AwardedDate.ToString("MMM dd, yyyy") - @awards.AwardedDate.ToString("MMM dd, yyyy")
                                     </span>
                                 </td>
 
