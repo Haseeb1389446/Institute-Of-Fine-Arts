@@ -82,7 +82,7 @@ wwwroot\Uploads\images\springartcontest.png
 wwwroot\Uploads\images\Winter Art Extravaganza - December 2024.png
 wwwroot\Uploads\paintings\6a68db930e8906f82a42b3faaf1bf088.jpg
 wwwroot\Uploads\paintings\avatar-generations_rpge.jpg
-wwwroot\Uploads\paintings\ChatGPT Image Aug 15, 2026, 02_20_39 PM.png
 wwwroot\Uploads\paintings\clown.jpg
 wwwroot\Uploads\paintings\fool.jpg
 wwwroot\Uploads\paintings\john wick.jpg
+wwwroot\Uploads\paintings\ChatGPT Image Aug 15, 2026, 02_20_39 PM.png

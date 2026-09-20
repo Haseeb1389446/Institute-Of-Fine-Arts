@@ -85,8 +85,8 @@
                     <div class="artwork-details">
 
                         <div>
-                            <span>Grade</span>
-                            <strong class="grade">A+</strong>
+                            <span>Creativity</span>
+                            <strong class="grade">@(painting.Creativity ?? "Not Assigned Yet")</strong>
                         </div>
 
                         <div>
@@ -105,13 +105,13 @@
                         <div>
                             <small>JUDGE'S REMARKS</small>
                             <p>
-                                Excellent use of contrast and layering.
+                                    @(painting.Remarks ?? "No remarks provided yet.")
                             </p>
                         </div>
                     </div>
 
                     <button class="artwork-btn">
-                        <a asp-controller="Home" asp-action="PaintingDetails">
+                        <a asp-controller="Home" asp-action="PaintingDetails" asp-route-id="@painting.Id">
                         <i class="fas fa-eye"></i>
                         View Artwork
                         </a>

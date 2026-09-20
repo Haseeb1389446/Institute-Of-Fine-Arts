@@ -63,9 +63,9 @@
                         </div>
 
                         <div class="grade-box">
-                            <small>GRADE</small>
+                            <small>Creativity</small>
                             <strong>
-                                @(ViewBag.Award ?? "N/A" )
+                                @(Model.Creativity ?? "Not Assigned Yet" )
                             </strong>
                         </div>
 
@@ -152,8 +152,8 @@
 
 
                     <!-- Remarks -->
-                    @* @if (!string.IsNullOrEmpty(Model.Remarks)) 
-                    { *@
+                     @if (!string.IsNullOrEmpty(Model.Remarks)) 
+                    { 
                     <div class="remarks-box">
 
                         <div class="remarks-icon">
@@ -164,12 +164,12 @@
                             <span>JUDGE'S REMARKS</span>
 
                             <p>
-                                @* @Model.Remarks *@
+                                @Model.Remarks
                             </p>
                         </div>
 
                     </div>
-                    @* } *@
+                    }
 
 
                     <!-- Footer -->

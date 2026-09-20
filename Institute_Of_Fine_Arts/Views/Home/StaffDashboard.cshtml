@@ -124,8 +124,8 @@
 
                                 <td>
                                     <div class="date-info">
-                                        <span>@competition.StartDate</span>
-                                        <small>to @competition.EndDate</small>
+                                        <span>@competition.StartDate.ToString("MMMM dd, yyyy")</span>
+                                        <small>to @competition.EndDate.ToString("MMMM dd, yyyy")</small>
                                     </div>
                                 </td>
 
@@ -205,6 +205,7 @@
 
                 <thead>
                     <tr>
+                        <th>Painting</th>
                         <th>Student</th>
                         <th>Painting</th>
                         <th>Creativity</th>
@@ -215,55 +216,33 @@
 
                 <tbody>
 
+                    @foreach (var painting in Model.Paintings)
+                    {
                     <tr>
+                            <td><img src="~/Uploads/paintings/@painting.PaintingImage" height="50px" width="50px" alt="Painting" class="rounded" /></td>
                         <td>
                             <div class="student-cell">
-                                <div class="student-avatar">EW</div>
-                                <strong>Emma Watson</strong>
+                                    <div class="student-avatar">@painting.Student!.UserName!.Substring(0, 1).ToUpper()</div>
+                                <strong>@painting.Student!.UserName</strong>
                             </div>
                         </td>
 
-                        <td>Sunset Dreams</td>
+                        <td>@painting.PaintingName</td>
 
                         <td>
-                            <span class="rating-badge">Better</span>
+                                <span class="rating-badge">@(painting.Creativity ?? "Not Assigned Yet")</span> 
                         </td>
 
-                        <td>Great use of colors!</td>
+                        <td>@(painting.Remarks ?? "No Remarks")</td>
 
                         <td>
-                            <button class="review-btn">
+                            <a asp-controller="Home" asp-action="AddRemarks" asp-route-id="@painting.Id" class="btn review-btn">
                                 <i class="fas fa-comment-alt"></i>
-                                Review
-                            </button>
+                                Add Remarks
+                            </a>
                         </td>
                     </tr>
-
-                    <tr>
-
-                        <td>
-                            <div class="student-cell">
-                                <div class="student-avatar">JD</div>
-                                <strong>John Doe</strong>
-                            </div>
-                        </td>
-
-                        <td>City Lights</td>
-
-                        <td>
-                            <span class="rating-badge moderate">Moderate</span>
-                        </td>
-
-                        <td>Needs sharper contrasts.</td>
-
-                        <td>
-                            <button class="review-btn">
-                                <i class="fas fa-comment-alt"></i>
-                                Review
-                            </button>
-                        </td>
-
-                    </tr>
+                    }
 
                 </tbody>
 
@@ -332,7 +311,7 @@
                                     </div>
                                 </td>
 
-                                <td>@award.AwardedDate</td>
+                                <td>@award.AwardedDate.ToString("MMMM dd, yyyy")</td>
 
                                 <td>
                                     <div class="student-cell">
@@ -441,7 +420,7 @@
                                     </div>
                                 </td>
 
-                                <td>@exhibition.ExhibitionDate</td>
+                                <td>@exhibition.ExhibitionDate.ToString("MMMM dd, yyyy")</td>
 
                                 <td>
                                     <span class="location-text">

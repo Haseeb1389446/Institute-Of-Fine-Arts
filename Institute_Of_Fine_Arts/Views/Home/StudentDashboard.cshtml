@@ -87,26 +87,45 @@
 
         <div class="competition-list">
 
-            @foreach (var competition in ViewBag.upcoming)
+            @if (ViewBag.upcoming != null && ViewBag.upcoming.Count > 0)
             {
-            <div class="competition-item">
-                <div class="competition-date">
-                        <strong>@competition.StartDate.Day</strong>
-                        <span>@competition.StartDate.Month</span>
-                </div>
+                @foreach (var competition in ViewBag.upcoming)
+                {
+                    <div class="competition-item">
+                        <div class="competition-date">
+                            <strong>@competition.StartDate.Day</strong>
+                            <span>@competition.StartDate.ToString("MMM")</span>
+                        </div>
 
-                <div class="competition-info">
-                        <h4>@competition.Title</h4>
+                        <div class="competition-info">
+                            <h4>@competition.Title</h4>
+
+                            <p>
+                                <i class="far fa-calendar"></i>
+                                @competition.StartDate.ToString("MMMM dd, yyyy")
+                            </p>
+                        </div>
+
+                        <span class="status-badge upcoming">
+                            Upcoming
+                        </span>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+
+                    <h4>No Upcoming Competitions</h4>
+
                     <p>
-                        <i class="far fa-calendar"></i>
-                            @competition.StartDate.ToString("MMMM dd, yyyy")
+                        There are currently no upcoming competitions available.
+                        Check back later for new opportunities.
                     </p>
                 </div>
-
-                <span class="status-badge upcoming">
-                    Upcoming
-                </span>
-            </div>
             }
 
         </div>
@@ -148,35 +167,96 @@
 
                 <tbody>
 
-                    @foreach (var painting in Model.Paintings)
+                    @if (Model.Paintings != null && Model.Paintings.Count > 0)
                     {
-                        <tr>
-                            <td>
-                                <div class="painting-name">
-                                    <div class="painting-icon">
-                                        <img src="~/Uploads/paintings/@painting.PaintingImage" height="60px" width="60px" alt="Alternate Text" />
+                        @foreach (var painting in Model.Paintings)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="painting-name">
+
+                                        <div class="painting-icon">
+                                            @if (!string.IsNullOrEmpty(painting.PaintingImage))
+                                            {
+                                                <img src="~/Uploads/paintings/@painting.PaintingImage"
+                                                     height="60"
+                                                     width="60"
+                                                     alt="@painting.PaintingName" />
+                                            }
+                                            else
+                                            {
+                                                <div class="no-image">
+                                                    <i class="fas fa-palette"></i>
+                                                </div>
+                                            }
                                     </div>
+
                                     <strong>@painting.PaintingName</strong>
+
                                 </div>
                             </td>
-                            <td>@painting.Description</td>
-                            <td>@painting.DatePosted.ToString("MMMM dd, yyyy")</td>
+
                             <td>
-                                <span class="table-status">
-                                    
-                                </span>
-                            </td>
-                            <td>
-                                <div class="table-actions">
-                                    <a class="action-btn" asp-controller="Home" asp-action="PaintingDetails" asp-route-id="@painting.Id">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a class="action-btn" asp-controller="Home" asp-action="UpdatePainting" asp-route-id="@painting.Id">
-                                        <i class="fas fa-pen"></i>
-                                    </a>
-                                    <a class="action-btn delete" asp-controller="Home" asp-action="DeletePainting" asp-route-id="@painting.Id">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                @(string.IsNullOrEmpty(painting.Description)
+                                                            ? "No description available"
+                                                            : painting.Description)
+                        </td>
+
+                                <td>
+                                    @painting.DatePosted.ToString("MMMM dd, yyyy")
+                                </td>
+
+                                <td>
+                                    <span class="table-status">
+                                        Submitted
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <div class="table-actions">
+
+                                        <a class="action-btn"
+                                           asp-controller="Home"
+                                           asp-action="PaintingDetails"
+                                           asp-route-id="@painting.Id">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <a class="action-btn"
+                                           asp-controller="Home"
+                                           asp-action="UpdatePainting"
+                                           asp-route-id="@painting.Id">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+
+                                        <a class="action-btn delete"
+                                           asp-controller="Home"
+                                           asp-action="DeletePainting"
+                                           asp-route-id="@painting.Id">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5">
+                                <div class="empty-state">
+
+                                    <div class="empty-state-icon">
+                                        <i class="fas fa-palette"></i>
+                                    </div>
+
+                                    <h4>No Paintings Yet</h4>
+
+                                    <p>
+                                        You haven't submitted any artwork yet.
+                                    </p>
+
                                 </div>
                             </td>
                         </tr>
@@ -208,18 +288,42 @@
 
             <div class="award-list">
 
-                @foreach (var award in Model.Awards)
+                @if (Model.Awards != null && Model.Awards.Count > 0)
                 {
-                <div class="award-item">
-                    <div class="award-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
+                    @foreach (var award in Model.Awards)
+                    {
+                        <div class="award-item">
 
-                    <div>
-                            <h4>@award.AwardTitle</h4>
-                        <p>@award.Competition.Title</p>
+                            <div class="award-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+
+                            <div>
+                                <h4>@award.AwardTitle</h4>
+
+                                <p>
+                                    @(award.Competition?.Title ?? "Competition not assigned")
+                                </p>
+                            </div>
+
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="empty-state compact">
+
+                        <div class="empty-state-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+
+                        <h4>No Awards Yet</h4>
+
+                        <p>
+                            Your achievements and awards will appear here.
+                        </p>
+
                     </div>
-                </div>
                 }
 
             </div>
@@ -239,41 +343,43 @@
                 <i class="fas fa-comment-dots panel-heading-icon"></i>
             </div>
 
+            @if (Model.Paintings != null && Model.Paintings.Count > 0)
+            {
+                @foreach (var remark in Model.Paintings)
+                {
+                    <div class="feedback-modern">
 
-            <div class="feedback-modern">
+                        <div class="feedback-top">
+                            <strong>
+                                @remark.PaintingName
+                            </strong>
+                        </div>
 
-                <div class="feedback-top">
-                    <strong>Sunset Dreams</strong>
-
-                    <span class="rating">
-                        ★★★★☆
-                    </span>
-                </div>
-
-                <p>
-                    Beautiful color blending! Try enhancing the
-                    background detailing next time.
+                        <p>
+                            @(string.IsNullOrEmpty(remark.Description)
+                                                ? "No feedback available yet."
+                                                : remark.Description)
                 </p>
 
-            </div>
+                    </div>
+                        }
+            }
+            else
+            {
+                <div class="empty-state compact">
 
+                    <div class="empty-state-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
 
-            <div class="feedback-modern">
+                    <h4>No Feedback Yet</h4>
 
-                <div class="feedback-top">
-                    <strong>City Lights</strong>
+                    <p>
+                        Staff feedback and remarks will appear here after your artwork is reviewed.
+                    </p>
 
-                    <span class="rating">
-                        ★★★☆☆
-                    </span>
                 </div>
-
-                <p>
-                    Nice concept! Improve contrast in the
-                    main structures.
-                </p>
-
-            </div>
+            }
 
         </section>
 

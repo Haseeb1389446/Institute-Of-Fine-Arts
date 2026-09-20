@@ -4,6 +4,7 @@ using Institute_Of_Fine_Arts.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Institute_Of_Fine_Arts.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260917034121_init125")]
+    partial class init125
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,9 +176,6 @@ namespace Institute_Of_Fine_Arts.Migrations
                     b.Property<int>("CompetitionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Creativity")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DatePosted")
                         .HasColumnType("datetime2");
 
@@ -192,9 +192,6 @@ namespace Institute_Of_Fine_Arts.Migrations
                     b.Property<string>("PoemOrQuote")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("StudentId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -206,6 +203,40 @@ namespace Institute_Of_Fine_Arts.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Paintings");
+                });
+
+            modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Remark", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AuthorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creativity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaintingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("PaintingId")
+                        .IsUnique();
+
+                    b.ToTable("Remarks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -462,6 +493,23 @@ namespace Institute_Of_Fine_Arts.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Remark", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("Institute_Of_Fine_Arts.Models.Painting", "Painting")
+                        .WithOne("Remark")
+                        .HasForeignKey("Institute_Of_Fine_Arts.Models.Remark", "PaintingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Painting");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -521,6 +569,11 @@ namespace Institute_Of_Fine_Arts.Migrations
             modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Exhibition", b =>
                 {
                     b.Navigation("ExhibitedPaintings");
+                });
+
+            modelBuilder.Entity("Institute_Of_Fine_Arts.Models.Painting", b =>
+                {
+                    b.Navigation("Remark");
                 });
 #pragma warning restore 612, 618
         }

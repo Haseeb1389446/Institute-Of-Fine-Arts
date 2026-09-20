@@ -1,0 +1,319 @@
+﻿@model Painting
+
+@{
+    ViewData["Title"] = "Update Artwork Review";
+}
+
+<main class="review-page">
+
+    <!-- Header -->
+    <section class="review-header">
+        <div class="container">
+
+            <a asp-controller="Home"
+               asp-action="ViewPaintings"
+               class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Artworks
+            </a>
+
+            <div class="review-heading">
+
+                <div>
+                    <span class="eyebrow">STAFF REVIEW</span>
+
+                    <h1>Update Artwork Review</h1>
+
+                    <p>
+                        Review and update the evaluation for this artwork.
+                    </p>
+                </div>
+
+                <div class="review-badge">
+                    <i class="fas fa-pen-to-square"></i>
+                    Edit Evaluation
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Review Section -->
+    <section class="review-section">
+
+        <div class="container">
+
+            <div class="review-grid">
+
+                <!-- Artwork Preview -->
+                <div class="artwork-preview-card">
+
+                    <div class="preview-header">
+                        <span>ARTWORK PREVIEW</span>
+
+                        <i class="fas fa-image"></i>
+                    </div>
+
+
+                    <div class="artwork-image-wrapper">
+
+                        @if (!string.IsNullOrEmpty(Model.PaintingImage))
+                        {
+                            <img src="~/Uploads/paintings/@Model.PaintingImage"
+                                 alt="@Model.PaintingName"
+                                 class="artwork-preview-image" />
+                        }
+                        else
+                        {
+                            <div class="no-artwork">
+
+                                <i class="fas fa-image"></i>
+
+                                <p>
+                                    No artwork image available
+                                </p>
+
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <div class="artwork-basic-info">
+
+                        <span class="info-label">
+                            ARTWORK TITLE
+                        </span>
+
+                        <h2>
+                            @Model.PaintingName
+                        </h2>
+
+
+                        <div class="artist-info">
+
+                            <div class="artist-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+
+                            <div>
+
+                                <span>STUDENT</span>
+
+                                <strong>
+                                    @(ViewBag.StudentName ?? "Unknown Student")
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Update Form -->
+                <div class="review-form-card">
+
+                    <div class="form-card-header">
+
+                        <div class="header-icon">
+                            <i class="fas fa-pen-to-square"></i>
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Update Evaluation
+                            </h2>
+
+                            <p>
+                                Modify the grade and staff feedback.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form method="post"
+                          asp-controller="Home"
+                          asp-action="UpdateRemarks">
+
+                        <!-- Hidden ID -->
+                        <input type="hidden"
+                               asp-for="Id" />
+
+
+                        <!-- Competition -->
+                        <div class="info-box">
+
+                            <div class="info-box-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    COMPETITION
+                                </span>
+
+                                <strong>
+                                    @(ViewBag.CompetitionName ?? "Not Assigned")
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Grade -->
+                        <div class="form-group">
+
+                            <label asp-for="Creativity">
+
+                                <i class="fas fa-star"></i>
+
+                                Creativity / Grade
+
+                            </label>
+
+
+                            <select asp-for="Creativity"
+                                    class="modern-input">
+
+                                <option value="">
+                                    Select Grade
+                                </option>
+
+                                <option value="A+">
+                                    A+ — Outstanding
+                                </option>
+
+                                <option value="A">
+                                    A — Excellent
+                                </option>
+
+                                <option value="B+">
+                                    B+ — Very Good
+                                </option>
+
+                                <option value="B">
+                                    B — Good
+                                </option>
+
+                                <option value="C">
+                                    C — Satisfactory
+                                </option>
+
+                                <option value="D">
+                                    D — Needs Improvement
+                                </option>
+
+                            </select>
+
+
+                            <span asp-validation-for="Creativity"
+                                  class="validation-message">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Remarks -->
+                        <div class="form-group">
+
+                            <label asp-for="Remarks">
+
+                                <i class="fas fa-comment-dots"></i>
+
+                                Staff Remarks
+
+                            </label>
+
+
+                            <textarea asp-for="Remarks"
+                                      class="modern-input modern-textarea"
+                                      rows="6"
+                                      placeholder="Update your feedback about the artwork..."></textarea>
+
+
+                            <div class="textarea-footer">
+
+                                <span>
+
+                                    <i class="fas fa-lightbulb"></i>
+
+                                    Keep your feedback constructive
+                                    and specific.
+
+                                </span>
+
+                            </div>
+
+
+                            <span asp-validation-for="Remarks"
+                                  class="validation-message">
+                            </span>
+
+                        </div>
+
+
+                        <!-- Existing Review Notice -->
+                        <div class="review-note">
+
+                            <i class="fas fa-clock-rotate-left"></i>
+
+                            <div>
+
+                                <strong>
+                                    Updating Existing Review
+                                </strong>
+
+                                <p>
+                                    You are modifying the previously
+                                    submitted evaluation for this artwork.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Buttons -->
+                        <div class="form-actions">
+
+                            <a asp-controller="Home"
+                               asp-action="ViewPaintings"
+                               class="cancel-btn">
+
+                                Cancel
+
+                            </a>
+
+
+                            <button type="submit"
+                                    class="submit-review-btn">
+
+                                <i class="fas fa-save"></i>
+
+                                Update Review
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
