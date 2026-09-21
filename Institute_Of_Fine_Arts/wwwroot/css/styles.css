@@ -4466,7 +4466,7 @@ footer .col-lg-4 p {
     }
 
 .painting-preview {
-    width: 150px;
+    width: 120px;
     min-height: 150px;
     display: flex;
     align-items: center;
@@ -4478,6 +4478,7 @@ footer .col-lg-4 p {
 
 .painting-content {
     padding: 20px;
+    margin-left: 30px;
 }
 
 .painting-tag {

@@ -91,10 +91,20 @@
 
                         <div>
                             <span>Review Status</span>
-                            <strong class="status-approved">
-                                <i class="fas fa-check-circle"></i>
-                                Reviewed
-                            </strong>
+                                    @if (painting.Remarks != null)
+                                    {
+                                        <strong class="status-approved">
+                                            <i class="fas fa-check-circle"></i>
+                                            Reviewed
+                                        </strong>
+                                    }
+                                    else
+                                    {
+                                        <strong class="status-approved">
+                                            <i class="fa-regular fa-circle"></i>
+                                            Pending
+                                        </strong>
+                                    }
                         </div>
 
                     </div>

@@ -530,56 +530,33 @@
 
         <div class="painting-grid">
 
+            @foreach (var painting in ViewBag.paintings)
+            {
             <div class="painting-card">
 
                 <div class="painting-preview">
-                    <i class="fas fa-image"></i>
+                    <img src="~/Uploads/paintings/@painting.PaintingImage" alt="Alternate Text" />
                 </div>
 
                 <div class="painting-content">
 
                     <span class="painting-tag">FEATURED</span>
 
-                    <h3>Sunset Dreams</h3>
+                    <h3>@painting.PaintingName</h3>
 
                     <p class="painting-student">
                         <i class="fas fa-user"></i>
-                        Emma Watson
+                            @painting.Student.UserName
                     </p>
 
                     <div class="painting-comment">
-                        "Excellent use of color gradients"
+                        "@(painting.Remarks ?? "No Remarks Added Yet.")"
                     </div>
 
                 </div>
 
             </div>
-
-
-            <div class="painting-card">
-
-                <div class="painting-preview">
-                    <i class="fas fa-image"></i>
-                </div>
-
-                <div class="painting-content">
-
-                    <span class="painting-tag">RECENT</span>
-
-                    <h3>City Lights</h3>
-
-                    <p class="painting-student">
-                        <i class="fas fa-user"></i>
-                        John Doe
-                    </p>
-
-                    <div class="painting-comment">
-                        "Needs better composition"
-                    </div>
-
-                </div>
-
-            </div>
+            }
 
         </div>
 

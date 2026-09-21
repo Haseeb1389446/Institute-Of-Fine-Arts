@@ -110,7 +110,7 @@
                             <div>
                                 <span>Submitted On</span>
                                 <strong>
-                                    @Model.DatePosted
+                                    @Model.DatePosted.ToString("MMMM dd, yyyy")
                                 </strong>
                             </div>
                         </div>
@@ -176,8 +176,16 @@
                     <div class="detail-footer">
 
                         <div class="review-status">
-                            <i class="fas fa-check-circle"></i>
-                            Artwork Reviewed
+                            @if(Model.Remarks != null)
+                            {
+                                <i class="fas fa-check-circle"></i>
+                                <span>Artwork Reviewed</span>
+                            }
+                            else
+                            {
+                                <i class="fa-regular fa-circle"></i>
+                                <span>Pending Review</span> 
+                            }
                         </div>
 
                         <a asp-controller="Home"

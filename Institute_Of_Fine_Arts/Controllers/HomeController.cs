@@ -519,6 +519,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
             ViewBag.competitions = await _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student).ToListAsync();
             ViewBag.awards = await _Context.Awards.Include(user => user.Student).ToListAsync();
+            ViewBag.paintings = await _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).OrderByDescending(p => p.DatePosted).Take(2).ToListAsync();
 
             ViewBag.upcoming = _Context.Exhibitions.Where(e => e.Status == "UpComming").ToList();
 
@@ -533,6 +534,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
             ViewBag.students = await _userManager.GetUsersInRoleAsync("Student");
             ViewBag.staff = await _userManager.GetUsersInRoleAsync("Staff");
+            ViewBag.paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
 
             return View(users);
         }
@@ -578,6 +580,24 @@ namespace Institute_Of_Fine_Arts.Controllers
                 return RedirectToAction("AdminDashboard");
 
             return View(user);
+        }
+
+        public IActionResult UpdateSubmission()
+        {
+            var paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
+            _Context.Paintings.RemoveRange(paintings);
+            _Context.SaveChanges();
+
+            return RedirectToAction("AdminDashboard");
+        }
+
+        public IActionResult DeleteSubmission()
+        {
+            var paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
+            _Context.Paintings.RemoveRange(paintings);
+            _Context.SaveChanges();
+
+            return RedirectToAction("AdminDashboard");
         }
 
         // Admin End

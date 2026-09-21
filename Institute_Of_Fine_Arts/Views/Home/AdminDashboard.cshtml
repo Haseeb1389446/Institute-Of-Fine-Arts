@@ -395,80 +395,64 @@
 
                     <thead>
                         <tr>
+                            <th>Painting</th>
                             <th>Student</th>
                             <th>Painting</th>
-                            <th>Competition</th>
-                            <th>Status</th>
+                            <th>Creativity</th>
+                            <th>Remarks</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
-
                     <tbody>
 
-                        <tr>
+                        @foreach (var painting in ViewBag.paintings)
+                        {
+                            <tr>
+                                <td><img src="~/Uploads/paintings/@painting.PaintingImage" height="50px" width="50px" alt="Painting" class="rounded" /></td>
+                                <td>
+                                    <div class="student-cell">
+                                        <div class="student-avatar">@painting.Student!.UserName!.Substring(0, 1).ToUpper()</div>
+                                        <strong>@painting.Student!.UserName</strong>
+                                    </div>
+                                </td>
 
-                            <td>
-                                <div class="user-cell">
-                                    <div class="table-avatar">
-                                        E
+                                <td>@painting.PaintingName</td>
+
+                                <td>
+                                    <span class="rating-badge">@(painting.Creativity ?? "Not Assigned Yet")</span>
+                                </td>
+
+                                <td>@(painting.Remarks ?? "No Remarks")</td>
+
+                                <td>
+
+                                    <div class="table-actions">
+
+                                        <a class="action-btn edit-btn"
+                                           asp-controller="Home"
+                                           asp-action="UpdateSubmission"
+                                           asp-route-id="@painting.Id">
+
+                                            <i class="fas fa-pen"></i>
+
+                                        </a>
+
+
+                                        <a class="action-btn delete-btn"
+                                           asp-controller="Home"
+                                           asp-action="DeleteSubmission"
+                                           asp-route-id="@painting.Id">
+
+                                            <i class="fas fa-trash"></i>
+
+                                        </a>
+
                                     </div>
 
-                                    <strong>
-                                        Emma Watson
-                                    </strong>
-                                </div>
-                            </td>
-
-                            <td>
-                                Sunset Dreams
-                            </td>
-
-                            <td>
-                                Annual Art Gala 2025
-                            </td>
-
-                            <td>
-                                <span class="status-badge approved">
-                                    Approved
-                                </span>
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>
-
-                                <div class="user-cell">
-
-                                    <div class="table-avatar">
-                                        J
-                                    </div>
-
-                                    <strong>
-                                        John Doe
-                                    </strong>
-
-                                </div>
-
-                            </td>
-
-                            <td>
-                                City Lights
-                            </td>
-
-                            <td>
-                                Modern Expressionism Contest
-                            </td>
-
-                            <td>
-                                <span class="status-badge pending">
-                                    Pending Review
-                                </span>
-                            </td>
-
-                        </tr>
+                                </td>
+                            </tr>
+                        }
 
                     </tbody>
 
