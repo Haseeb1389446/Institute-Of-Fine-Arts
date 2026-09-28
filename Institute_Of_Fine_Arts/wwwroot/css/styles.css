@@ -1395,18 +1395,71 @@ body {
     background: linear-gradient( to bottom, transparent 45%, rgba(0,0,0,.55) );
 }
 
+/* =========================================
+   COMPETITION DATE ROW
+========================================= */
 
 .competition-date {
-    position: absolute;
-    left: 18px;
-    bottom: 18px;
-    padding: 8px 13px;
-    background: rgba(255,255,255,.92);
-    color: var(--primary-dark);
-    border-radius: 50px;
-    font-size: 10px;
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    background: #faf7f5;
+    border: 1px solid #eee5df;
+    border-radius: 10px;
+}
+
+
+/* Date Icon */
+
+.date-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(196, 123, 87, 0.12);
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+
+/* Date Text */
+
+.competition-date > div:last-child {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* Starts / Ends */
+
+.competition-date small {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--muted);
+    font-size: 9px;
     font-weight: 700;
-    backdrop-filter: blur(8px);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* Actual Date */
+
+.competition-date strong {
+    display: block;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
 }
 
 
@@ -2930,18 +2983,6 @@ footer .col-lg-4 p {
         transform: translateX(3px);
     }
 
-.competition-date {
-    width: 52px;
-    height: 55px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--student-soft);
-    border-radius: 11px;
-    color: var(--student-primary);
-}
-
     .competition-date strong {
         font-size: 18px;
         line-height: 18px;
@@ -3322,11 +3363,6 @@ footer .col-lg-4 p {
 
     .competition-item {
         gap: 10px;
-    }
-
-    .competition-date {
-        width: 45px;
-        height: 48px;
     }
 
     .status-badge {

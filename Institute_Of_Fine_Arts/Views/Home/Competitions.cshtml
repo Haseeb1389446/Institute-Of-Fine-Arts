@@ -67,13 +67,13 @@
 
                                 <div>
                                     <small>Starts</small>
+
                                     <strong>
                                         @competition.StartDate.ToString("MMMM dd, yyyy")
                                     </strong>
                                 </div>
 
                             </div>
-
 
                             <div class="competition-date">
 
@@ -83,28 +83,27 @@
 
                                 <div>
                                     <small>Ends</small>
+
                                     <strong>
-                                        @competition.EndDate
+                                        @competition.EndDate.ToString("MMMM dd, yyyy")
                                     </strong>
                                 </div>
 
                             </div>
 
-
                             <div class="competition-footer">
 
                                 <span class="submission-count">
-                                    🎨 120 Submissions
+                                    🎨 @(competition.painting?.Count ?? 0) Submissions
                                 </span>
 
-                                <button class="competition-btn">
-                                    Register →
-                                </button>
+                                <span style="background-color:none; color:#C47B57; font-family:sans-serif; font-size:10px;">
+                                    Coming Soon →
+                                </span>
 
                             </div>
 
                         </div>
-
                     </div>
                 }
 
@@ -173,7 +172,7 @@
                                     <small>Started</small>
 
                                     <strong>
-                                        @competition.StartDate
+                                        @competition.StartDate.ToString("MMMM dd, yyyy")
                                     </strong>
                                 </div>
 
@@ -190,7 +189,7 @@
                                     <small>Deadline</small>
 
                                     <strong>
-                                        @competition.EndDate
+                                        @competition.EndDate.ToString("MMMM dd, yyyy")
                                     </strong>
                                 </div>
 
@@ -200,7 +199,7 @@
                             <div class="competition-footer">
 
                                 <span class="submission-count">
-                                    🎨 120 Submissions
+                                    🎨 @(competition.painting?.Count ?? 0) Submissions
                                 </span>
 
                                 <a asp-controller="Home" asp-action="CreateCompetitions" class="btn competition-btn">
@@ -265,12 +264,12 @@
                         </div>
 
 
+
                         <div class="competition-content">
 
                             <h3>@competition.Title</h3>
 
-
-                            <div class="winner-box">
+                        <div class="winner-box">
 
                                 <div class="winner-icon">
                                     🏆
@@ -301,7 +300,9 @@
 
 
                             <button class="competition-btn full-btn">
+                                <a class="text-white text-decoration-none" asp-controller="Home" asp-action="ViewPaintings">
                                 View Submissions →
+                                </a>
                             </button>
 
                         </div>

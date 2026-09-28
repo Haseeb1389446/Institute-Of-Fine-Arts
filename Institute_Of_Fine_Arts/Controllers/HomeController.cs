@@ -37,7 +37,7 @@ namespace Institute_Of_Fine_Arts.Controllers
 
         public IActionResult Competitions()
         {
-            var competitions = _Context.Competitions.Include(res => res.award).ThenInclude(s => s!.Student).ToList();
+            var competitions = _Context.Competitions.Include(p => p.painting).Include(res => res.award).ThenInclude(s => s!.Student).ToList();
 
             ViewBag.upcoming =  competitions.Where(c => c.Status == "UpComming").ToList();
             ViewBag.ongoing = competitions.Where(c => c.Status == "OnGoing").ToList();
