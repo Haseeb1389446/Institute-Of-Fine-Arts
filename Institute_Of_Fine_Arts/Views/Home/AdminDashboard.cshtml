@@ -70,7 +70,7 @@
 
                 <div>
                     <span>Submissions</span>
-                    <strong>24</strong>
+                    <strong>@(ViewBag.paintings.Count ?? 0)</strong>
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
 
                 <div>
                     <span>Pending Reviews</span>
-                    <strong>08</strong>
+                    <strong>@(ViewBag.pendingReview.Count ?? 0)</strong>
                 </div>
             </div>
 
@@ -381,7 +381,7 @@
                     </p>
                 </div>
 
-                <a href="#" class="view-all-btn">
+                <a asp-controller="Home" asp-action="ViewPaintings" class="view-all-btn">
                     View All
                     <i class="fas fa-arrow-right"></i>
                 </a>
@@ -429,7 +429,7 @@
 
                                     <div class="table-actions">
 
-                                        <a class="action-btn edit-btn"
+                                        <a class="action-btn edit-btn btn"
                                            asp-controller="Home"
                                            asp-action="UpdateSubmission"
                                            asp-route-id="@painting.Id">
@@ -439,7 +439,7 @@
                                         </a>
 
 
-                                        <a class="action-btn delete-btn"
+                                        <a class="action-btn delete-btn btn"
                                            asp-controller="Home"
                                            asp-action="DeleteSubmission"
                                            asp-route-id="@painting.Id">

@@ -536,6 +536,9 @@ namespace Institute_Of_Fine_Arts.Controllers
             ViewBag.staff = await _userManager.GetUsersInRoleAsync("Staff");
             ViewBag.paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
 
+            ViewBag.paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
+            ViewBag.pendingReview = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).Where(p => p.Remarks == null).ToList();
+
             return View(users);
         }
 
@@ -582,19 +585,28 @@ namespace Institute_Of_Fine_Arts.Controllers
             return View(user);
         }
 
-        public IActionResult UpdateSubmission()
+        public IActionResult UpdateSubmission(int id)
         {
-            var paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
-            _Context.Paintings.RemoveRange(paintings);
-            _Context.SaveChanges();
+            var paintings = _Context.Paintings.Find(id);
+            ViewBag.Competitions = _Context.Competitions.Where(c => c.Status == "OnGoing").ToList();
 
+            return View(paintings);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSubmission(Painting painting)
+        {
+            ViewBag.Competitions = _Context.Competitions.Where(c => c.Status == "OnGoing").ToList();
+
+            _Context.Entry(painting).State = EntityState.Modified;
+            _Context.SaveChanges();
             return RedirectToAction("AdminDashboard");
         }
 
-        public IActionResult DeleteSubmission()
+        public IActionResult DeleteSubmission(int id)
         {
-            var paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
-            _Context.Paintings.RemoveRange(paintings);
+            var paintings = _Context.Paintings.Find(id);
+            _Context.Paintings.Remove(paintings!);
             _Context.SaveChanges();
 
             return RedirectToAction("AdminDashboard");

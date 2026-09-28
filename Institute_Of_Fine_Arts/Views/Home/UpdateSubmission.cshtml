@@ -1,0 +1,279 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Institute_Of_Fine_Arts.Models.Painting
+
+@{
+    ViewData["Title"] = "Update Submission";
+}
+
+<div class="update-submission-page">
+
+    <div class="update-submission-header">
+
+        <div>
+            <span class="update-label">
+                ADMINISTRATION
+            </span>
+
+            <h1>Update Student Submission</h1>
+
+            <p>
+                Review and update the student's artwork submission details.
+            </p>
+        </div>
+
+        <a asp-controller="Home"
+           asp-action="AdminDashboard"
+           class="back-submissions-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Submissions
+        </a>
+
+    </div>
+
+
+    <div class="update-submission-container">
+
+        <!-- LEFT: FORM -->
+        <div class="update-form-card">
+
+            <div class="card-heading">
+
+                <div class="heading-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+
+                <div>
+                    <h2>Submission Details</h2>
+                    <p>Update artwork information</p>
+                </div>
+
+            </div>
+
+
+            <form asp-controller="Home"
+                  asp-action="UpdateSubmission"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                <input type="hidden"
+                       asp-for="Id" />
+                <input type="hidden"
+                       asp-for="StudentId" />
+                <input type="hidden"
+                       asp-for="PaintingImage" />
+
+
+                <!-- Painting Name -->
+                <div class="form-field">
+
+                    <label asp-for="PaintingName">
+                        Painting Name
+                    </label>
+
+                    <input asp-for="PaintingName"
+                           class="modern-input"
+                           placeholder="Enter painting name" />
+
+                    <span asp-validation-for="PaintingName"
+                          class="validation-message">
+                    </span>
+
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-field">
+
+                    <label asp-for="Description">
+                        Description
+                    </label>
+
+                    <textarea asp-for="Description"
+                              class="modern-input modern-textarea"
+                              placeholder="Describe the artwork...">
+                    </textarea>
+
+                    <span asp-validation-for="Description"
+                          class="validation-message">
+                    </span>
+
+                </div>
+
+
+                <!-- Poem / Quote -->
+                <div class="form-field">
+
+                    <label asp-for="PoemOrQuote">
+                        Poem / Quote
+                    </label>
+
+                    <textarea asp-for="PoemOrQuote"
+                              class="modern-input modern-textarea"
+                              placeholder="Enter poem, quote or story...">
+                    </textarea>
+
+                    <span asp-validation-for="PoemOrQuote"
+                          class="validation-message">
+                    </span>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label asp-for="Remarks">
+                        Teacher / Admin Remarks
+                    </label>
+
+                    <textarea asp-for="Remarks"
+                              class="modern-input modern-textarea"
+                              placeholder="Write feedback about the student's creativity...">
+    </textarea>
+
+                </div>
+
+                <div class="form-field">
+
+                    <label asp-for="Creativity">
+                        Creativity Grade
+                    </label>
+
+                    <select asp-for="Creativity"
+                            class="modern-input">
+
+                        <option value="">
+                            Select Creativity
+                        </option>
+
+                        <option value="Best">Best</option>
+                        <option value="Better">Better</option>
+                        <option value="Good">Good</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Normal">Normal</option>
+
+                    </select>
+
+                    <span asp-validation-for="Creativity"
+                          class="validation-message">
+                    </span>
+
+                </div>
+
+
+                <!-- Competition -->
+                <div class="form-field">
+
+                    <label asp-for="CompetitionId">
+                        Competition
+                    </label>
+
+                    <select asp-for="CompetitionId"
+                            class="modern-input">
+
+                        <option value="">
+                            Select Competition
+                        </option>
+
+                        @foreach (var competition in ViewBag.Competitions)
+                        {
+                            <option value="@competition.Id">
+                                @competition.Title
+                            </option>
+                        }
+
+                    </select>
+
+                    <span asp-validation-for="CompetitionId"
+                          class="validation-message">
+                    </span>
+
+                </div>
+
+                <div class="form-actions">
+
+                    <a asp-controller="Home"
+                       asp-action="AdminDashboard"
+                       class="cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                            class="update-btn">
+                        <i class="fas fa-save"></i>
+                        Update Submission
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- RIGHT: CURRENT ARTWORK -->
+        <div class="submission-preview-card">
+
+            <div class="preview-heading">
+
+                <span>CURRENT ARTWORK</span>
+
+                <i class="fas fa-image"></i>
+
+            </div>
+
+
+            <div class="current-artwork">
+
+                @if (!string.IsNullOrEmpty(Model.PaintingImage))
+                {
+                    <img src="~/Uploads/paintings/@Model.PaintingImage"
+                         alt="@Model.PaintingName" />
+                }
+                else
+                {
+                    <div class="no-preview-image">
+                        <i class="fas fa-image"></i>
+                        <span>No Image Available</span>
+                    </div>
+                }
+
+            </div>
+
+
+            <div class="preview-info">
+
+                <span class="preview-category">
+                    STUDENT ARTWORK
+                </span>
+
+                <h3>
+                    @Model.PaintingName
+                </h3>
+
+                @if (!string.IsNullOrEmpty(Model.Description))
+                {
+                    <p>
+                        @Model.Description
+                    </p>
+                }
+
+                <div class="preview-date">
+
+                    <i class="far fa-calendar"></i>
+
+                    Submitted
+                    @Model.DatePosted.ToString("MMM dd, yyyy")
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
