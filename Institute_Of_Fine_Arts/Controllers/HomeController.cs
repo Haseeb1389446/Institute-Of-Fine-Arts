@@ -75,6 +75,12 @@ namespace Institute_Of_Fine_Arts.Controllers
                     await competitionimage.CopyToAsync(stream);
                 }
 
+                AddActivity(
+                    "Created competition",
+                    competition.Title,
+                    "fa-trophy"
+                );
+
                 competition.Banner = competitionimage.FileName;
                 await _Context.Competitions.AddAsync(competition);
                 await _Context.SaveChangesAsync();
@@ -82,7 +88,7 @@ namespace Institute_Of_Fine_Arts.Controllers
                 return RedirectToAction("staffDashboard");
             }
 
-                return View();
+         return View();
         }
 
         public async Task<IActionResult> UpdateCompetitions(int id)
@@ -364,20 +370,32 @@ namespace Institute_Of_Fine_Arts.Controllers
             {
                 var rootPath = _root.WebRootPath;
                 var location = Path.Combine(rootPath, "Uploads", "paintings");
+
                 if (!Directory.Exists(location))
                 {
                     Directory.CreateDirectory(location);
                 }
+
                 var fileLocation = Path.Combine(location, paintingimage.FileName);
+
                 using (var stream = new FileStream(fileLocation, FileMode.Create))
                 {
                     await paintingimage.CopyToAsync(stream);
                 }
+
+                AddActivity(
+                    "Added a new painting submission",
+                    painting.PaintingName ?? "Painting",
+                    "fa-image"
+                );
+
                 painting.PaintingImage = paintingimage.FileName;
                 _Context.Paintings.Add(painting);
                 _Context.SaveChanges();
+
                 return RedirectToAction("ViewPaintings");
             }
+
             return View();
         }
 
@@ -517,7 +535,7 @@ namespace Institute_Of_Fine_Arts.Controllers
             ViewBag.students = await _userManager.GetUsersInRoleAsync("Student");
             ViewBag.staff = await _userManager.GetUsersInRoleAsync("Staff");
 
-            ViewBag.competitions = await _Context.Competitions.Include(res => res.award).ThenInclude(s => s.Student).ToListAsync();
+            ViewBag.competitions = await _Context.Competitions.Include(p => p.painting).Include(res => res.award).ThenInclude(s => s.Student).ToListAsync();
             ViewBag.awards = await _Context.Awards.Include(user => user.Student).ToListAsync();
             ViewBag.paintings = await _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).OrderByDescending(p => p.DatePosted).Take(2).ToListAsync();
 
@@ -538,6 +556,8 @@ namespace Institute_Of_Fine_Arts.Controllers
 
             ViewBag.paintings = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).ToList();
             ViewBag.pendingReview = _Context.Paintings.Include(c => c.Competition).Include(s => s.Student).Where(p => p.Remarks == null).ToList();
+
+            ViewBag.Activities = _Context.Activities.OrderByDescending(a => a.CreatedAt).Take(10).ToList();
 
             return View(users);
         }
@@ -598,6 +618,12 @@ namespace Institute_Of_Fine_Arts.Controllers
         {
             ViewBag.Competitions = _Context.Competitions.Where(c => c.Status == "OnGoing").ToList();
 
+            AddActivity(
+                "Reviewed painting",
+                painting.PaintingName,
+                "fa-eye"
+             );
+
             _Context.Entry(painting).State = EntityState.Modified;
             _Context.SaveChanges();
             return RedirectToAction("AdminDashboard");
@@ -613,5 +639,20 @@ namespace Institute_Of_Fine_Arts.Controllers
         }
 
         // Admin End
+
+        private void AddActivity(string action, string? description, string icon)
+        {
+            var activity = new Models.Activity
+            {
+                UserId = _userManager.GetUserId(User),
+                UserName = User.Identity?.Name ?? "System User",
+                Action = action,
+                Description = description,
+                Icon = icon,
+                CreatedAt = DateTime.Now
+            };
+
+            _Context.Activities.Add(activity);
+        }
     }
 }

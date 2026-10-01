@@ -132,7 +132,6 @@
                         <th>Student</th>
                         <th>Email</th>
                         <th>Enrolled Course</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
 
@@ -174,12 +173,6 @@
                                 <td>
                                     <span class="course-badge">
                                         Bachelor of Arts
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <span class="status-badge active-status">
-                                        <span></span> Active
                                     </span>
                                 </td>
 
@@ -237,7 +230,6 @@
                         <th>Staff Member</th>
                         <th>Email</th>
                         <th>Department</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
 
@@ -279,12 +271,6 @@
                                 <td>
                                     <span class="course-badge">
                                         Sculpture
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <span class="status-badge active-status">
-                                        <span></span> Active
                                     </span>
                                 </td>
 
@@ -380,7 +366,7 @@
 
                                 <td>
                                     <span class="count-badge">
-                                        80
+                                        @(competitions.painting != null ? competitions.painting.Count : 0)
                                     </span>
                                 </td>
 
@@ -564,7 +550,7 @@
 
 
     <!-- Exhibited Paintings -->
-    <section class="manager-section">
+    @* <section class="manager-section">
 
         <div class="manager-section-header">
 
@@ -647,7 +633,7 @@
 
         </div>
 
-    </section>
+    </section> *@
 
 
     <!-- Upcoming Exhibitions -->

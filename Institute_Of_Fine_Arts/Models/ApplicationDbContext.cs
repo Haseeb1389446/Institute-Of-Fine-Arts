@@ -13,5 +13,6 @@ namespace Institute_Of_Fine_Arts.Models
         public DbSet<Painting> Paintings { get; set; }
         public DbSet<Exhibition> Exhibitions { get; set; }
         public DbSet<ExhibitedPainting> ExhibitedPaintings { get; set; }
+        public DbSet<Activity> Activities { get; set; }
     }
 }

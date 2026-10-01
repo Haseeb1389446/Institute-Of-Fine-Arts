@@ -1337,6 +1337,11 @@ body {
    UPCOMING COMPETITIONS
 ========================================================= */
 
+.competition-item {
+    flex-direction: column;
+    align-items: start;
+}
+
 .competitions-section {
     padding: 120px 0 130px;
     background: radial-gradient( circle at 10% 10%, rgba(196,123,87,.07), transparent 30% ), #fff;
