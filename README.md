@@ -149,7 +149,7 @@ The platform also supports awards. Awards can be created and managed, associated
 
 # 📸 Screenshots
 
-> Add your actual screenshots to the `screenshots/` folder using the filenames below. These are placeholders and do not assume the images already exist.
+> A visual tour of the platform, including its dashboards, competition system, painting workflow, and evaluation features.
 
 ## 🏠 Home Page
 <!-- Add Home Page screenshot here -->
@@ -189,15 +189,15 @@ The platform also supports awards. Awards can be created and managed, associated
 
 ## 🖼️ Student Paintings / Gallery
 <!-- Add Student Paintings screenshot here -->
-![Student Paintings](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-PaintingSubmission-View.png)
+![Student Paintings](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-StudentPaintings-View.png)
 
 ## 🥇 Awards
 <!-- Add Awards screenshot here -->
-![Awards]()
+![Awards](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-Awards-View.png)
 
 ## 📋 Staff Activity
 <!-- Add Staff Activity screenshot here -->
-![Staff Activity]()
+![Staff Activity](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-StaffActivities-View.png)
 
 # 🚀 How to Explore the Platform
 
