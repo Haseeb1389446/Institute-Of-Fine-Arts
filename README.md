@@ -153,51 +153,51 @@ The platform also supports awards. Awards can be created and managed, associated
 
 ## 🏠 Home Page
 <!-- Add Home Page screenshot here -->
-![Home Page](screenshots/home.png)
+![Home Page](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-Home-View.png)
 
 ## 🔑 Login Page
 <!-- Add Login Page screenshot here -->
-![Login Page](screenshots/login.png)
+![Login Page](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-Login-View.png)
 
 ## 🎨 Student Dashboard
 <!-- Add Student Dashboard screenshot here -->
-![Student Dashboard](screenshots/student-dashboard.png)
+![Student Dashboard](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-StudentDashboard-View.png)
 
 ## 👨‍🎨 Staff / Teacher Dashboard
 <!-- Add Staff Dashboard screenshot here -->
-![Staff Dashboard](screenshots/staff-dashboard.png)
+![Staff Dashboard](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-StaffDashboard-View.png)
 
 ## 🧑‍💼 Manager Dashboard
 <!-- Add Manager Dashboard screenshot here -->
-![Manager Dashboard](screenshots/manager-dashboard.png)
+![Manager Dashboard](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-ManagerDashboard-View.png)
 
 ## 👑 Admin Dashboard
 <!-- Add Admin Dashboard screenshot here -->
-![Admin Dashboard](screenshots/admin-dashboard.png)
+![Admin Dashboard](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-AdminDashboard-View.png)
 
 ## 🏆 Competitions
 <!-- Add Competitions screenshot here -->
-![Competitions](screenshots/competitions.png)
+![Competitions](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-Competitions-View.png)
 
 ## 🖌️ Painting Submission
 <!-- Add Painting Submission screenshot here -->
-![Painting Submission](screenshots/painting-submission.png)
+![Painting Submission](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-PaintingSubmission-View.png)
 
 ## 🔎 Painting Details / Evaluation
 <!-- Add Painting Details screenshot here -->
-![Painting Details](screenshots/painting-details.png)
+![Painting Details](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-PaintingDetails-View.png)
 
 ## 🖼️ Student Paintings / Gallery
 <!-- Add Student Paintings screenshot here -->
-![Student Paintings](screenshots/student-paintings.png)
+![Student Paintings](https://github.com/Haseeb1389446/Institute-Of-Fine-Arts/blob/main/InstituteOfFineArts%20View/IOFA-PaintingSubmission-View.png)
 
 ## 🥇 Awards
 <!-- Add Awards screenshot here -->
-![Awards](screenshots/awards.png)
+![Awards]()
 
 ## 📋 Staff Activity
 <!-- Add Staff Activity screenshot here -->
-![Staff Activity](screenshots/staff-activity.png)
+![Staff Activity]()
 
 # 🚀 How to Explore the Platform
 
